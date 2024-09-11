@@ -8,15 +8,24 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "/public/$1",
-      "headers": {
-        "Cache-Control": "public, max-age=86400"
-      }
+      "src": "/login",
+      "dest": "/public/login.html"
     },
     {
-      "src": "/api/(.*)",
-      "dest": "/views/server.js"
+      "src": "/register",
+      "dest": "/public/register.html"
+    },
+    {
+      "src": "/dashboard",
+      "dest": "/public/dashboard.html"
+    },
+    {
+      "src": "/home",
+      "dest": "/public/home.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
     }
   ]
 }
