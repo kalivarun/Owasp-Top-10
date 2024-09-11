@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerable Web Application</title>
+    <style>
+    
+/* Apply background color to the whole page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #6c757d; /* Grey color for body background */
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.navbar {
+            background-color: #6e7072;
+            padding: 10px;
+            color: white;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Ensure navbar is above other content */
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2em;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+.container {
+    flex: 1; /* Take up available space */
+    max-width: 10000px;
+    margin: 0 auto;
+    padding: 60px 10px 10px; /* Adjust padding to account for fixed navbar */
+    background-color: #ffffff; /* White background for the container */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+}
+
+h1 {
+    margin-top: 0px;
+    color: #333;
+    font-size: 2.5em;
+    text-align: center; 
+    flex-shrink: 0; /* Prevent heading from shrinking */
+    background-image: url('https://news.sophos.com/wp-content/uploads/2016/03/badlock.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 150px; /* Adjust the height according to the logo */
+}
+
+.button-container {
+    margin-top: 10px; /* Adjust the spacing above the button container */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Ensure button container takes full width */
+    padding: 10px; /* Reduced padding to better fit the container */
+}
+
+.vuln-button {
+    width: 100%;  /* Make the buttons full-width inside the container */
+    max-width: 500px;  /* Maximum width to prevent buttons from being too wide */
+    padding: 20px;  /* Increased padding for bigger button size */
+    margin: 10px 0;
+    background-color: #007bff; /* Default blue background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 1s, transform 2s; /* Transition duration set to 0.2 seconds */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.vuln-button:hover {
+    background-color: #c54e4e; /* Change to red on hover */
+    transform: translateY(-2px);
+}
+
+footer {
+    margin-top: 20px;
+    color: #f5f5f5;
+    font-size: 0.7em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #666161;
+    padding: 10px;
+}
+
+
+    </style>
+
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="navbar">
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <!-- Add more navigation links if needed -->
+        </div>
+        <h1> Top 10 Vulnerability tasks <br> 2023</h1> <!-- Logo will be displayed as a background image -->
+        
+        <div class="button-container">
+            <button class="vuln-button">Broken Access Control</button>
+            <button class="vuln-button">Cryptographic Failures</button>
+            <button class="vuln-button">Injection</button>
+            <button class="vuln-button">Insecure Design</button>
+            <button class="vuln-button">Security Misconfiguration</button>
+            <button class="vuln-button">Vulnerable and Outdated Components</button>
+            <button class="vuln-button">Identification and Authentication Failures</button>
+            <button class="vuln-button">Software and Data Integrity Failures</button>
+            <button class="vuln-button">Security Logging and Monitoring Failures</button>
+            <button class="vuln-button">Server-Side Request Forgery (SSRF)</button>
+            <button class="vuln-button">Server-Side Request Forgery (SSRF)</button>
+            <br>
+            <br>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Vulnerable Web Application. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
+
