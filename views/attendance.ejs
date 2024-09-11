@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance</title>
+</head>
+<body>
+    <h1>Attendance for <%= date %></h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Date</th>
+                <th>Present</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% students.forEach(student => { %>
+                <tr>
+                    <td><%= student.name %></td>
+                    <td><%= student.date %></td>
+                    <td><%= student.present ? 'Yes' : 'No' %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <a href="/logout">Logout</a>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Full-screen video background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        /* Content container to ensure content is visible over the video */
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Adjust layout of the login and register buttons */
+        .nav-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        /* Centering OWASP Top 10 heading */
+        .centered-heading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            font-size: 3rem;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Full-screen video background -->
+    <video class="video-background" autoplay muted loop>
+        <source src="https://cdn.pixabay.com/video/2021/02/10/64813-510851151_large.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Content container -->
+    <div class="content">
+        <!-- Navigation buttons for login and register -->
+        <div class="nav-buttons">
+            <a href="/login" class="btn btn-primary">Login</a>
+            <a href="/register" class="btn btn-secondary">Register</a>
+        </div>
+
+        <!-- Main content of the page -->
+        <div class="container">
+            <h1 class="text-center text-white"><b>Welcome to NullClass</b></h1>
+            <p class="text-center text-white ">This is a practice page for web exploitation</p>
+        </div>
+    </div>
+
+    <!-- OWASP Top 10 heading centered -->
+    <div class="centered-heading">
+        <h1>OWASP Top 10</h1>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
