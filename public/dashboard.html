@@ -1,124 +1,123 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vulnerable Web Application</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-    
-/* Apply background color to the whole page */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #6c757d; /* Grey color for body background */
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
-.navbar {
-            background-color: #6e7072;
-            padding: 10px;
-            color: white;
-            text-align: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1000; /* Ensure navbar is above other content */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
         }
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.2em;
-        }
-
-        .navbar a:hover {
-            text-decoration: underline;
-        }
-
-.container {
-    flex: 1; /* Take up available space */
-    max-width: 10000px;
-    margin: 0 auto;
-    padding: 60px 10px 10px; /* Adjust padding to account for fixed navbar */
-    background-color: #ffffff; /* White background for the container */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center content horizontally */
-}
-
-h1 {
+        h1 {
     margin-top: 0px;
-    color: #333;
+    color: #ebeaea;
     font-size: 2.5em;
     text-align: center; 
     flex-shrink: 0; /* Prevent heading from shrinking */
-    background-image: url('https://news.sophos.com/wp-content/uploads/2016/03/badlock.png');
+
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    background-color: transparent;
+    background-blend-mode: multiply;
+    mix-blend-mode: screen;
+
+
     height: 150px; /* Adjust the height according to the logo */
 }
 
-.button-container {
-    margin-top: 10px; /* Adjust the spacing above the button container */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%; /* Ensure button container takes full width */
-    padding: 10px; /* Reduced padding to better fit the container */
-}
 
-.vuln-button {
+
+
+        /* Style for the video background */
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%; 
+            min-height: 100%;
+            z-index: -1; /* Behind content */
+            object-fit: cover; /* Ensure the video covers the screen */
+            filter: brightness(0.5); /* Dim the video slightly for better visibility */
+        }
+
+        .button-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 10px 10px;
+            background-color: transparent; /* Semi-transparent background */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            z-index: 1; /* Keep the container above the video */
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        .vuln-button {
     width: 100%;  /* Make the buttons full-width inside the container */
     max-width: 500px;  /* Maximum width to prevent buttons from being too wide */
     padding: 20px;  /* Increased padding for bigger button size */
     margin: 10px 0;
-    background-color: #007bff; /* Default blue background */
-    color: white;
+    background-color: #2ace8a; /* Default blue background */
+    color: rgb(230, 223, 223);
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1.2em;
     transition: background-color 1s, transform 2s; /* Transition duration set to 0.2 seconds */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(196, 18, 18, 0.1);
 }
+        .vuln-button:hover {
+            background-color: #d61b1b;
+            transform: translateY(-2px);
+        }
 
-.vuln-button:hover {
-    background-color: #c54e4e; /* Change to red on hover */
-    transform: translateY(-2px);
-}
+        footer {
+            margin-top: 20px;
+            color: #ffffff;
+            font-size: 0.7em;
+            background-color: transparent;
+            padding: 10px;
+            text-align: center;
+        }
+                /* Content container to ensure content is visible over the video */
+        .content {
+            position: relative;
+            z-index: 1;
+        }
 
-footer {
-    margin-top: 20px;
-    color: #f5f5f5;
-    font-size: 0.7em;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #666161;
-    padding: 10px;
-}
-
+        /* Adjust layout of the login and register buttons */
+        .nav-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
 
     </style>
-
 </head>
 <body>
 
+    <!-- Video element for background -->
+    <video id="bg-video" autoplay muted loop>
+        <source src="https://videos.pexels.com/video-files/3130284/3130284-uhd_2560_1440_30fps.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
 
-    <div class="container">
-        <div class="navbar">
-            <a href="/">Home</a>
-            <a href="/dashboard">Dashboard</a>
-            <!-- Add more navigation links if needed -->
+    <div class="content">
+        <!-- Navigation buttons for login and register -->
+        <div class="nav-buttons">
+            <a href="/dashboard" class="btn btn-primary">Dashboard</a>
+            <a href="/" class="btn btn-secondary">button</a>
         </div>
-        <h1> Top 10 Vulnerability tasks <br> 2023</h1> <!-- Logo will be displayed as a background image -->
-        
+     </div>   
         <div class="button-container">
+            <h1> Top 10 Vulnerability tasks <br> 2023</h1> <!-- Logo will be displayed as a background image -->
             <button class="vuln-button">Broken Access Control</button>
             <button class="vuln-button">Cryptographic Failures</button>
             <button class="vuln-button">Injection</button>
@@ -129,15 +128,12 @@ footer {
             <button class="vuln-button">Software and Data Integrity Failures</button>
             <button class="vuln-button">Security Logging and Monitoring Failures</button>
             <button class="vuln-button">Server-Side Request Forgery (SSRF)</button>
-            <button class="vuln-button">Server-Side Request Forgery (SSRF)</button>
-            <br>
-            <br>
         </div>
-    </div>
+    
 
     <footer>
         <p>&copy; 2024 Vulnerable Web Application. All Rights Reserved.</p>
     </footer>
+    
 </body>
 </html>
-
