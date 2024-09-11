@@ -12,26 +12,21 @@
             padding: 0;
             height: 100%;
         }
+
         h1 {
-    margin-top: 0px;
-    color: #ebeaea;
-    font-size: 2.5em;
-    text-align: center; 
-    flex-shrink: 0; /* Prevent heading from shrinking */
-
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: transparent;
-    background-blend-mode: multiply;
-    mix-blend-mode: screen;
-
-
-    height: 150px; /* Adjust the height according to the logo */
-}
-
-
-
+            margin-top: 0px;
+            color: #ebeaea;
+            font-size: 2.5em;
+            text-align: center;
+            flex-shrink: 0; /* Prevent heading from shrinking */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: transparent;
+            background-blend-mode: multiply;
+            mix-blend-mode: screen;
+            height: 150px; /* Adjust the height according to the logo */
+        }
 
         /* Style for the video background */
         #bg-video {
@@ -60,19 +55,20 @@
         }
 
         .vuln-button {
-    width: 100%;  /* Make the buttons full-width inside the container */
-    max-width: 500px;  /* Maximum width to prevent buttons from being too wide */
-    padding: 20px;  /* Increased padding for bigger button size */
-    margin: 10px 0;
-    background-color: #2ace8a; /* Default blue background */
-    color: rgb(230, 223, 223);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.2em;
-    transition: background-color 1s, transform 2s; /* Transition duration set to 0.2 seconds */
-    box-shadow: 0 4px 6px rgba(196, 18, 18, 0.1);
-}
+            width: 100%;  /* Make the buttons full-width inside the container */
+            max-width: 500px;  /* Maximum width to prevent buttons from being too wide */
+            padding: 20px;  /* Increased padding for bigger button size */
+            margin: 10px 0;
+            background-color: #4cdb47; /* Default blue background */
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 1s, transform 2s; /* Transition duration set to 0.2 seconds */
+            box-shadow: 0 4px 6px rgba(196, 18, 18, 0.1);
+        }
+
         .vuln-button:hover {
             background-color: #d61b1b;
             transform: translateY(-2px);
@@ -86,18 +82,34 @@
             padding: 10px;
             text-align: center;
         }
-                /* Content container to ensure content is visible over the video */
+
+        /* Content container to ensure content is visible over the video */
         .content {
             position: relative;
             z-index: 1;
         }
 
         /* Adjust layout of the login and register buttons */
-        .nav-buttons {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
+     /* Container for the nav buttons and logo */
+
+
+/* Adjust layout of the login and register buttons */
+.nav-buttons {
+    display: flex;
+    position: relative;
+    gap: 10px; /* Optional: space between buttons */
+    top: 20px;
+}
+
+/* Style for the logo image */
+.logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Make it circular */
+    border-color: #4cdb47;
+    object-fit: cover;
+    margin-left: auto; /* This pushes the logo to the right */
+}
 
     </style>
 </head>
@@ -113,27 +125,29 @@
         <!-- Navigation buttons for login and register -->
         <div class="nav-buttons">
             <a href="/dashboard" class="btn btn-primary">Dashboard</a>
-            <a href="/" class="btn btn-secondary">button</a>
+            <a href="/" class="btn btn-secondary">Home</a>
+            <img src="dashboard-logo.jpg" alt="Dashboard Logo" href="/" class="logo"> <!-- Circular logo image -->
+
         </div>
      </div>   
-        <div class="button-container">
-            <h1> Top 10 Vulnerability tasks <br> 2023</h1> <!-- Logo will be displayed as a background image -->
-            <button class="vuln-button">Broken Access Control</button>
-            <button class="vuln-button">Cryptographic Failures</button>
-            <button class="vuln-button">Injection</button>
-            <button class="vuln-button">Insecure Design</button>
-            <button class="vuln-button">Security Misconfiguration</button>
-            <button class="vuln-button">Vulnerable and Outdated Components</button>
-            <button class="vuln-button">Identification and Authentication Failures</button>
-            <button class="vuln-button">Software and Data Integrity Failures</button>
-            <button class="vuln-button">Security Logging and Monitoring Failures</button>
-            <button class="vuln-button">Server-Side Request Forgery (SSRF)</button>
-        </div>
-    
+
+    <div class="button-container">
+      <b>  <h1>Top 10 Vulnerability tasks </b><br> 2023</h1> <!-- Logo will be displayed as a background image -->
+        <button class="vuln-button">Broken Access Control</button>
+        <button class="vuln-button">Cryptographic Failures</button>
+        <button class="vuln-button">Injection</button>
+        <button class="vuln-button">Insecure Design</button>
+        <button class="vuln-button">Security Misconfiguration</button>
+        <button class="vuln-button">Vulnerable and Outdated Components</button>
+        <button class="vuln-button">Identification and Authentication Failures</button>
+        <button class="vuln-button">Software and Data Integrity Failures</button>
+        <button class="vuln-button">Security Logging and Monitoring Failures</button>
+        <button class="vuln-button">Server-Side Request Forgery (SSRF)</button>
+    </div>
 
     <footer>
         <p>&copy; 2024 Vulnerable Web Application. All Rights Reserved.</p>
     </footer>
-    
+
 </body>
 </html>
