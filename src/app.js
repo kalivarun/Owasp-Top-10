@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '..','public','Broken-access-control')));
 
 // Serve initial dashboard.html
 app.get('/dashboard', (req, res) => {
@@ -22,21 +23,21 @@ app.get('/dashboard', (req, res) => {
     } else if (task === 'bac') {
         if (!user) {
             // Serve login.html if 'test' is 'bac' and 'user' is missing
-            res.sendFile(path.join(__dirname, '..', 'public', 'login.html'));
+            res.sendFile(path.join(__dirname, '..', 'public', 'Broken-access-control', 'login.html'));
         } else {
             // Serve the appropriate user page based on the 'user' parameter
             switch (user) {
-                case 'dGVzdAo=': // Base64 for 'test'
-                    res.sendFile(path.join(__dirname, '..', 'public', 'test.html'));
+                case 'am9obgo=': // Base64 for 'test'
+                    res.sendFile(path.join(__dirname, '..', 'public','Broken-access-control', 'test.html'));
                     break;
                 case 'dG9ueQo=': // Base64 for 'tony'
-                    res.sendFile(path.join(__dirname, '..', 'public', 'tony.html'));
+                    res.sendFile(path.join(__dirname, '..', 'public','Broken-access-control', 'tony.html'));
                     break;
                 case 'YWRtaW4K': // Base64 for 'admin'
-                    res.sendFile(path.join(__dirname, '..', 'public', 'admin.html'));
+                    res.sendFile(path.join(__dirname, '..', 'public','Broken-access-control', 'admin.html'));
                     break;
                 default:
-                    res.status(404).send('Page Not Found');
+                    res.status(404).send('404 Not Found');
             }
         }
     } else {
@@ -50,8 +51,8 @@ app.post('/login', (req, res) => {
 
     // Define users and their credentials
     const users = {
-        test: { password: 'test', redirect: '/dashboard?task=bac&user=dGVzdAo=' },
-        tony: { password: 'stark', redirect: '/dashboard?task=bac&user=dG9ueQo=' },
+        john: { password: 'Y0uHavet0AccessUserTony', redirect: '/dashboard?task=bac&user=am9obgo=' },
+        tony: { password: 'hisdaughter', redirect: '/dashboard?task=bac&user=dG9ueQo=' },
         admin: { password: 'Superuser123', redirect: '/dashboard?task=bac&user=YWRtaW4K' }
     };
 
@@ -65,11 +66,11 @@ app.post('/login', (req, res) => {
 
 // Serve static pages
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'login.html'));
+    res.sendFile(path.join(__dirname, '..', 'public', 'Broken-access-control', 'login.html'));
 });
 
 app.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'register.html'));
+    res.sendFile(path.join(__dirname, '..', 'public', 'Broken-access-control' , 'register.html'));
 });
 
 // Handle 404 - Page Not Found
@@ -79,5 +80,5 @@ app.use((req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(Server running on http://localhost:${PORT});
 });
