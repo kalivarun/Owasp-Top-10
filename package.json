@@ -6,15 +6,14 @@
     "start": "node src/app.js",
     "dev": "nodemon src/app.js"
   },
-"dependencies": {
-  "pg": "^8.7.1", // or the version you're using
-  "express": "^4.17.1",
-  "body-parser": "^1.19.0",
-  "crypto": "^1.0.1"
-  // other dependencies
-}
-,
+  "dependencies": {
+    "base64url": "^3.0.1",
+    "express": "^4.17.3",
+    "pg": "^8.12.0",
+    "semver": "^7.6.3",
+    "simple-update-notifier": "^2.0.0"
+  },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^3.1.4"
   }
 }
