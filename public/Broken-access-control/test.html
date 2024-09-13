@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+           body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            display: flex;
+            background-color: #f4f6f9;
+        }
+
+        /* Vertical Navbar */
+        .navbar-vertical {
+            height: 100%;
+            width: 250px;
+            background-color: #343a40;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            transition: width 0.3s ease-in-out;
+        }
+
+        /* Navbar links */
+        .navbar-vertical a {
+            padding: 15px 20px;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            transition: 0.3s;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .navbar-vertical a:hover {
+            background-color: #495057;
+            color: white;
+        }
+
+        /* Navbar icon styling */
+        .navbar-vertical a i {
+            margin-right: 10px;
+        }
+
+        /* Main content area */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            flex-grow: 1;
+            background-color: #f8f9fa;
+            transition: margin-left 0.3s ease-in-out;
+        }
+
+        /* Button styling */
+        .btn-custom {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .btn-custom:hover {
+            background-color: #45a049;
+        }
+
+        /* Custom content styling */
+        .content-area {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 15px;
+        }
+
+        .text-center {
+            margin-top: -13%;
+            font-family: 'Courier New', Courier, monospace;
+            margin-left: 34px;
+        }
+
+        .bottom-buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar-vertical {
+                width: 80px; /* Shrink navbar */
+            }
+
+            .main-content {
+                margin-left: 80px; /* Adjust main content area */
+            }
+
+            /* Shrink text and icon spacing in navbar */
+            .navbar-vertical a {
+                padding: 10px;
+                font-size: 12px;
+                justify-content: center;
+            }
+
+            .navbar-vertical a i {
+                margin-right: 0; /* Remove margin for icons */
+            }
+
+            /* Logo shrink */
+            .logo {
+                width: 30px;
+                height: 30px;
+            }
+
+            .text-center {
+                font-size: 12px;
+                margin-left: 0;
+            }
+        }
+
+        /* Extra small screens (mobile) */
+        @media (max-width: 576px) {
+            .navbar-vertical {
+                width: 60px;
+            }
+
+            .main-content {
+                margin-left: 60px;
+            }
+
+            .navbar-vertical a {
+                font-size: 10px;
+                padding: 8px;
+            }
+
+            .logo {
+                width: 25px;
+                height: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+       <!-- Vertical Navbar -->
+       <div class="navbar-vertical">
+        <img src="https://whatsondisneyplus.b-cdn.net/wp-content/uploads/2021/09/homer.png" alt="Dashboard Logo" class="logo">
+        <h3 class="text-center"><b>John</b></h3>
+        <br>
+        <a href="#" onclick="loadDashboard()" style="text-decoration: none;"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="#" onclick="loadProfile()" style="text-decoration: none;"><i class="fas fa-user"></i> Profile</a>
+        <a href="#" onclick="loadSettings()" style="text-decoration: none;"><i class="fas fa-cog"></i> Settings</a>
+        <a href="/" onclick="loadLogout()" style="text-decoration: none;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <h1 style="text-align: center; font-family:'Courier New', Courier, monospace; font-weight: 1000; font-size: 50px;">Welcome John</h1>
+        
+        <div id="content" class="content-area">
+            <div style="text-align: center; align-items: center;">
+                <p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">Select an option from the sidebar to view content.</p>
+                <img src="https://img.freepik.com/premium-photo/drawing-eye-with-cross-it_783884-264535.jpg" alt="Image" style="width: 100%; max-width: 500px; height: auto;">
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- JavaScript for innerHTML changes -->
+    <script>
+    function loadDashboard() {
+        document.getElementById('content').innerHTML = `
+
+        <div style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+            <h2>Dashboard: Broken Access Control</h2>
+            <p><b>What is Broken Access Control?</b></p>
+            <p>Broken Access Control occurs when an application does not properly enforce permissions or access control mechanisms, 
+            allowing unauthorized users to access data or perform actions they shouldn't. This can happen due to misconfigured settings, 
+            improper coding, or vulnerabilities in the application's security model.<br>
+            
+Broken Access Control is a security vulnerability that occurs when users can access resources or perform actions beyond their intended permissions. 
+This happens when an application fails to properly enforce restrictions on what authenticated users are allowed to do. 
+Broken access control can lead to unauthorized information disclosure, modification, or destruction of data, and execution of administrative tasks.
+
+Common Scenarios of Broken Access Control:<br>
+Vertical Privilege Escalation: A lower-privileged user, like a regular user, gains access to administrative functions.
+<br>
+Example: A regular user accessing an admin panel by simply guessing the URL (e.g., /admin), without the proper access control in place.
+Horizontal Privilege Escalation: A user gains access to resources or data belonging to another user with the same access level.
+<br>
+Example: A user accessing another user’s account or private data by changing a user ID in the URL (e.g., /profile/123 to /profile/456).
+Accessing Hidden Resources: Users gain access to hidden but unprotected pages or functionality.
+<br>
+Example: A file or API endpoint that is not visible in the user interface but is accessible if the URL is manually entered.
+Modifying Access Control Tokens or Parameters: Manipulating session tokens or user attributes to gain higher privileges.
+<br>
+Example: Altering a session token to trick the system into thinking the user has higher-level access.
+Causes of Broken Access Control:
+Lack of Proper Authorization Checks: Failing to check the permissions before accessing resources.
+Hardcoded Access Controls: Using predictable URL paths or hidden form fields for sensitive functions.
+Insecure Direct Object References (IDOR): Allowing users to access objects by simply changing the ID in the request.
+Inconsistent Access Control Policies: Different parts of an application enforcing access control in different ways.
+Examples of Broken Access Control:
+<br>
+Insecure APIs: APIs that don't check if the user making the request is allowed to perform the action (e.g., viewing or modifying someone else’s data).
+Unprotected URLs: Some web applications have unprotected routes (like /admin/dashboard), which can be accessed without proper authentication or authorization.
+File Upload Vulnerabilities: Allowing users to upload files without verifying their privileges.
+How to Prevent Broken Access Control:
+<br>
+Deny by Default: Implement a default-deny policy, allowing access only to those explicitly granted permissions.
+Least Privilege: Ensure users only have access to the minimum resources necessary for their role.
+Session Management: Use strong session management techniques to ensure a user cannot hijack or elevate privileges.
+Proper Authorization Checks: Always check user roles and permissions before allowing access to resources or performing actions.
+Penetration Testing: Regular security testing can help identify broken access control vulnerabilities.
+Impact of Broken Access Control:
+<br>
+Data Breaches: Unauthorized access to sensitive information.
+<br>
+Service Disruption: Attackers may modify or delete critical resources.
+<br>
+Financial and Legal Consequences: Organizations can face penalties for non-compliance with data protection laws.
+<br>
+Broken access control is one of the most serious security vulnerabilities because it can lead to full system compromise if not properly mitigated. This is why it's included as a high-priority item in the OWASP Top 10.</p>
+
+        </div>   
+
+            <div class="bottom-buttons" style="position: absolute; bottom: 20px; left: 0; right: 0; text-align: center;">
+                <button class="btn-custom">View Reports</button>
+                <button class="btn-custom">Manage Tasks</button>
+            </div>
+        `;
+    }
+
+
+        function loadProfile() {
+            document.getElementById('content').innerHTML = `
+             <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Styles for profile page */
+        .profile-container {
+            margin-top: 50px;
+        }
+        .profile-header {
+            background-color: #575757;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .profile-details {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .profile-item {
+            margin-bottom: 15px;
+        }
+        .edit-button {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .alert-button {
+            background-color: #ff4d4d;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container profile-container">
+        <!-- Profile header -->
+        <div class="profile-header">
+            <h2>User Profile</h2>
+        </div>
+
+        <!-- Profile details -->
+        <div class="profile-details">
+            <div class="profile-item"><strong>Name:</strong>John deo</div>
+            <div class="profile-item"><strong>Address:</strong> Newziland</div>
+            <div class="profile-item"><strong>Date of Birth:</strong> June 12, 1998</div>
+            <div class="profile-item"><strong>Job Role:</strong>Humen researcher</div>
+            <div class="profile-item"><strong>Subjects:</strong> Computer Science, Data Structures, Algorithms</div>
+            <div class="profile-item"><strong>Total Projects:</strong> 1200 Completed Projects</div>
+            <div class="profile-item"><strong>Email:</strong> johndeo@gmail.com</div>
+        </div>
+
+        <!-- Edit Profile button -->
+        <div class="edit-button">
+            <button class="btn btn-danger" id="editProfileButton" onclick="editProfile()">Edit Profile</button>
+        </div>
+    </div>
+
+
+
+            `;
+        }
+
+        function loadSettings() {
+    document.getElementById('content').innerHTML = `
+        <h2>Settings</h2>
+        <div class="settings-container">
+            <!-- Account Information Section -->
+            <h4>Account Information</h4>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" value="john deo" readonly>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" value="johndeo@gmail.com.com">
+            </div>
+
+            <!-- Password Update Section -->
+            <h4>Change Password</h4>
+            <div class="form-group">
+                <label for="currentPassword">Current Password</label>
+                <input type="password" class="form-control" id="currentPassword">
+            </div>
+            <div class="form-group">
+                <label for="newPassword">New Password</label>
+                <input type="password" class="form-control" id="newPassword">
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm New Password</label>
+                <input type="password" class="form-control" id="confirmPassword">
+            </div>
+            <button class="btn-custom" onclick="alert('You do not have permissoin to upade the password contact admin')">Update Password</button>
+
+            <!-- Notification Preferences Section -->
+            <h4>Notification Preferences</h4>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="emailNotifications" checked>
+                <label class="form-check-label" for="emailNotifications">Email Notifications</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="smsNotifications">
+                <label class="form-check-label" for="smsNotifications">SMS Notifications</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="pushNotifications" checked>
+                <label class="form-check-label" for="pushNotifications">Push Notifications</label>
+            </div>
+
+            <!-- Account Security Section -->
+            <h4>Account Security</h4>
+            <div class="form-group">
+                <label for="twoFactorAuth">Enable Two-Factor Authentication</label>
+                <input type="checkbox" class="form-control" id="twoFactorAuth" checked>
+            </div>
+            <button class="btn-custom" onclick="alert('You do not have permission to save your settings')">Save Settings</button>
+        </div>
+    `;
+}
+
+
+        function loadLogout() {
+            document.getElementById('content').innerHTML = `
+                <h2>Logout</h2>
+                <p>Are you sure you want to log out?</p>
+                <button class="btn-custom">Confirm Logout</button>
+            `;
+        }
+        
+        // JavaScript function to display alert when editing the profile
+        function editProfile() {
+            alert("You don't have permission to edit the profile.");
+        }
+ 
+    </script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

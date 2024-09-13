@@ -1,0 +1,4 @@
+I hope you checked the source code of the page
+
+Task: This website contains a cryptographic failure vulnerability find the user crypto password. 
+Flag: user Crypto Adam's password is the flag. 

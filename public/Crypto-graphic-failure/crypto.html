@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            display: flex;
+            background-color: #f4f6f9;
+        }
+
+        /* Vertical Navbar */
+        .navbar-vertical {
+            height: 100%;
+            width: 250px;
+            background-color: #343a40;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            transition: width 0.3s ease-in-out;
+        }
+
+        /* Navbar links */
+        .navbar-vertical a {
+            padding: 15px 20px;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            transition: 0.3s;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .navbar-vertical a:hover {
+            background-color: #495057;
+            color: white;
+        }
+
+        /* Navbar icon styling */
+        .navbar-vertical a i {
+            margin-right: 10px;
+        }
+
+        /* Main content area */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            flex-grow: 1;
+            background-color: #f8f9fa;
+            transition: margin-left 0.3s ease-in-out;
+        }
+
+        /* Button styling */
+        .btn-custom {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .btn-custom:hover {
+            background-color: #45a049;
+        }
+
+        /* Custom content styling */
+        .content-area {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 15px;
+        }
+
+        .text-center {
+            margin-top: -13%;
+            font-family: 'Courier New', Courier, monospace;
+            margin-left: 34px;
+        }
+
+        .bottom-buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar-vertical {
+                width: 80px; /* Shrink navbar */
+            }
+
+            .main-content {
+                margin-left: 80px; /* Adjust main content area */
+            }
+
+            /* Shrink text and icon spacing in navbar */
+            .navbar-vertical a {
+                padding: 10px;
+                font-size: 12px;
+                justify-content: center;
+            }
+
+            .navbar-vertical a i {
+                margin-right: 0; /* Remove margin for icons */
+            }
+
+            /* Logo shrink */
+            .logo {
+                width: 30px;
+                height: 30px;
+            }
+
+            .text-center {
+                font-size: 12px;
+                margin-left: 0;
+            }
+        }
+
+        /* Extra small screens (mobile) */
+        @media (max-width: 576px) {
+            .navbar-vertical {
+                width: 60px;
+            }
+
+            .main-content {
+                margin-left: 60px;
+            }
+
+            .navbar-vertical a {
+                font-size: 10px;
+                padding: 8px;
+            }
+
+            .logo {
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Vertical Navbar -->
+    <div class="navbar-vertical">
+        <img src="https://kriptomat.io/wp-content/uploads/2021/12/A-Short-History-of-Cryptocurrencies-5-1024x677.webp" alt="Dashboard Logo" href="/" class="logo"><h3 class="text-center"><b>Crypto</b></h3>
+       <br>
+        <h3 class="text-center"></h3>
+        <a href="#" onclick="loadDashboard()" style="text-decoration: none;">Dashboard</a>
+        <a href="#" onclick="loadProfile()" style="text-decoration: none;">Profile</a>
+        <a href="#" onclick="loadSettings()" style="text-decoration: none;">Settings</a>
+        <a href="/" onclick="loadLogout()" style="text-decoration: none;">Logout</a>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <h1 style="text-align: center; font-family:'Courier New', Courier, monospace; font-weight: 1000;font-size: 60px;">Welcome Crypto</h1>
+     
+        <div id="content" class="content-area">
+            <div style="text-align: center;align-items: center;">
+                <p style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">Select an option from the sidebar to view content.</p>
+                <img src="https://st3.depositphotos.com/5466018/15994/v/450/depositphotos_159947638-stock-illustration-coin-crypto-currency-ethereum-icon.jpg" alt="Image" style="width: 500px;height: 500px;">
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- JavaScript for innerHTML changes -->
+    <script>
+ 
+    function loadDashboard() {
+        document.getElementById('content').innerHTML = `
+
+        <div style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+            <h2>Dashboard: Cryptographic Failure</h2>
+            <p><b>What is Cryptographic Failure?</b></p>
+            
+Cryptographic failure, or "cryptographic failure," refers to security issues and vulnerabilities arising from incorrect or weak implementation of cryptographic algorithms and protocols. These failures can compromise data confidentiality, integrity, and authenticity. Here are some common examples of cryptographic failures:
+<br>
+Weak Encryption Algorithms: Using outdated or weak encryption algorithms, such as DES (Data Encryption Standard), which can be easily broken with modern computing power.
+<br>
+Improper Key Management: Failing to securely manage encryption keys, such as using hard-coded keys in source code, which can be extracted by attackers.
+<br>
+Poor Random Number Generation: Using weak or predictable random number generators for cryptographic purposes, leading to predictable keys and insecure encryption.
+<br>
+Insecure Hash Functions: Using hash functions like MD5 or SHA-1, which are vulnerable to collisions (where two different inputs produce the same hash), making them unsuitable for cryptographic security.
+<br>
+Improper Implementation of Cryptographic Protocols: Incorrectly implementing cryptographic protocols, such as SSL/TLS, which can lead to vulnerabilities like man-in-the-middle attacks.
+<br>
+Lack of Padding Validation: In cryptographic operations like encryption, improper validation or handling of padding can lead to padding oracle attacks.
+<br>
+Insecure Storage of Encrypted Data: Storing encrypted data in an insecure manner or without additional safeguards, leading to potential exposure of sensitive information.
+<br>
+Examples in Real-World Context
+Heartbleed Bug: A vulnerability in the OpenSSL library that allowed attackers to read sensitive data from the memory of affected systems due to improper handling of the TLS heartbeat extension.
+<br>
+WEP Encryption in Wi-Fi: The Wired Equivalent Privacy (WEP) protocol used in Wi-Fi networks was found to be weak and easily breakable, leading to its replacement with WPA/WPA2.
+<br>
+SHA-1 Deprecation: SHA-1, once widely used for cryptographic hashing, was found to be susceptible to collision attacks, leading to its deprecation in favor of stronger hash functions like SHA-256.
+<br>
+Prevention and Best Practices
+Use Strong Cryptographic Algorithms: Employ well-reviewed, modern algorithms and protocols, such as AES for encryption and SHA-256 for hashing.<br>
+Implement Secure Key Management: Store keys securely, use hardware security modules (HSMs), and follow best practices for key lifecycle management.<br>
+Regularly Update Libraries and Protocols: Keep cryptographic libraries and protocols up-to-date to protect against known vulnerabilities.<br>
+Validate and Verify Implementations: Ensure that cryptographic operations are correctly implemented and validated according to industry standards.<br>
+Understanding and addressing cryptographic failures is crucial for maintaining the security and privacy of sensitive data in any system.
+        </div>   
+
+            <div class="bottom-buttons" style="position: absolute; bottom: 20px; left: 0; right: 0; text-align: center;">
+                <button class="btn-custom">View Reports</button>
+                <button class="btn-custom">Manage Tasks</button>
+            </div>
+        `;
+    }
+
+
+        function loadProfile() {
+            document.getElementById('content').innerHTML = `
+             <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Styles for profile page */
+        .profile-container {
+            margin-top: 50px;
+        }
+        .profile-header {
+            background-color: #575757;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .profile-details {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .profile-item {
+            margin-bottom: 15px;
+        }
+        .edit-button {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .alert-button {
+            background-color: #ff4d4d;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container profile-container">
+        <!-- Profile header -->
+        <div class="profile-header">
+            <h2>User Profile</h2>
+        </div>
+
+        <!-- Profile details -->
+        <div class="profile-details">
+            <div class="profile-item"><strong>Name:</strong>Crypto Adam </div>
+            <div class="profile-item"><strong>Address:</strong> Germany</div>
+            <div class="profile-item"><strong>Date of Birth:</strong> Feb 3, 1993</div>
+            <div class="profile-item"><strong>Job Role:</strong> All rounder</div>
+            <div class="profile-item"><strong>Subjects:</strong> Computer Science, Data Structures, Algorithms, Maths , AI, ML</div>
+            <div class="profile-item"><strong>Total Projects:</strong> 3 Completed Projects</div>
+            <div class="profile-item"><strong>Email:</strong> cryptoadam@gamil.com</div>
+            <div class="profile-item"><strong>Country id:</strong> PAU210303126135 </div>
+        </div>
+
+        <!-- Edit Profile button -->
+        <div class="edit-button">
+            <button class="btn btn-danger" id="editProfileButton" onclick="editProfile()">Edit Profile</button>
+        </div>
+    </div>
+
+
+
+            `;
+        }
+
+        function loadSettings() {
+    document.getElementById('content').innerHTML = `
+        <h2>Settings</h2>
+        <div class="settings-container">
+            <!-- Account Information Section -->
+            <h4>Account Information</h4>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" value="Crypto Adam" readonly>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" value="cryptoadam@gamil.com">
+            </div>
+
+            <!-- Password Update Section -->
+            <h4>Change Password</h4>
+            <div class="form-group">
+                <label for="currentPassword">Current Password</label>
+                <input type="password" class="form-control" id="currentPassword">
+            </div>
+            <div class="form-group">
+                <label for="newPassword">New Password</label>
+                <input type="password" class="form-control" id="newPassword">
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm New Password</label>
+                <input type="password" class="form-control" id="confirmPassword">
+            </div>
+            <button class="btn-custom" onclick="alert('You do not have permissoin to upade the password contact admin')">Update Password</button>
+
+            <!-- Notification Preferences Section -->
+            <h4>Notification Preferences</h4>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="emailNotifications" checked>
+                <label class="form-check-label" for="emailNotifications">Email Notifications</label>
+            </div>to
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="smsNotifications">
+                <label class="form-check-label" for="smsNotifications">SMS Notifications</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="pushNotifications" checked>
+                <label class="form-check-label" for="pushNotifications">Push Notifications</label>
+            </div>
+
+            <!-- Account Security Section -->
+            <h4>Account Security</h4>
+            <div class="form-group">
+                <label for="twoFactorAuth">Enable Two-Factor Authentication</label>
+                <input type="checkbox" class="form-control" id="twoFactorAuth" checked>
+            </div>
+            <button class="btn-custom" onclick="alert('You do not have permission to save your settings')">Save Settings</button>
+        </div>
+    `;
+}
+
+
+        function loadLogout() {
+            document.getElementById('content').innerHTML = `
+                <h2>Logout</h2>
+                <p>Are you sure you want to log out?</p>
+                <button class="btn-custom">Confirm Logout</button>
+            `;
+        }
+        
+        // JavaScript function to display alert when editing the profile
+        function editProfile() {
+            alert("You don't have permission to edit the profile.");
+        }
+ 
+    </script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

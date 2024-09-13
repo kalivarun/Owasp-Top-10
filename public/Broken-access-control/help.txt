@@ -1,0 +1,10 @@
+{
+    
+    user: "john"
+    password: "Y0uHavet0AccessUserTony"
+
+}
+
+
+Task: this page contains Broken accress control vulnerability, access user Tony and get the flag 
+Flag: find user tonys country id
