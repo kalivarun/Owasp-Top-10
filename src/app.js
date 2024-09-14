@@ -12,8 +12,10 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// Serve static files for Broken Access Control and Cryptographic Failure
 app.use(express.static(path.join(__dirname, '..', 'public', 'Broken-access-control')));
-app.use(express.static(path.join(__dirname, '..', 'public', 'Crypto-graphic-failure'))); // Serve static files for cryptographic failure
+app.use(express.static(path.join(__dirname, '..', 'public', 'Crypto-graphic-failure')));
 
 // PostgreSQL connection setup
 const pool = new Pool({
@@ -21,7 +23,7 @@ const pool = new Pool({
     host: process.env.PG_HOST || 'ep-fragrant-forest-a4w4801s-pooler.us-east-1.aws.neon.tech',
     database: process.env.PG_DATABASE || 'verceldb',
     password: process.env.PG_PASSWORD || 'hAcK51xzCEoH',
-    port: process.env.PG_PORT || 5432, // default PostgreSQL port
+    port: process.env.PG_PORT || 5432,
     ssl: {
         rejectUnauthorized: false // This line is needed for some environments; adjust as needed
     }
@@ -42,10 +44,7 @@ app.get('/dashboard/assets/stored/database/store.db', (req, res) => {
 app.get('/dashboard/assets/stored/database/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'Crypto-graphic-failure', 'db.html'));
 });
-app.use(express.static(path.join(__dirname, '..', 'public')));
-app.use(express.static(path.join(__dirname, '..', 'public', 'Crypto-graphic-failure')));
 
-// Serve initial dashboard.html
 // Serve initial dashboard.html
 app.get('/dashboard', (req, res) => {
     const task = req.query.task;
@@ -104,6 +103,7 @@ app.get('/dashboard', (req, res) => {
         res.status(400).send('Bad Request');
     }
 });
+
 // Handle login POST request
 app.post('/login', async (req, res) => {
     const { username, password, task } = req.body; // task now comes from the login form
@@ -171,9 +171,6 @@ app.post('/login', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-
-
-
 
 // Handle 404 - Page Not Found
 app.use((req, res) => {
