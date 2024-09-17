@@ -6,43 +6,214 @@
     <title>Command Execution - Vulnerable App</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            margin: 50px;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
         }
-        input, textarea {
+        .sidebar {
+            width: 250px;
+            background-color: #75797e;
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            height: 100%;
+        }
+        .sidebar h1 {
+            font-size: 24px;
+            margin: 0 0 20px;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px 0;
+            font-size: 18px;
+            border-bottom: 1px solid #000000;
+            transition: background-color 0.2s;
+        }
+        .sidebar a:hover {
+            background-color: #000000;
+        }
+        .sidebar .logout {
+            margin-top: 20px;
             padding: 10px;
-            margin: 10px;
-            width: 80%;
-            max-width: 600px;
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 4px;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            flex-grow: 1;
+            background-color: #f0f4f8;
+            height: 100vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .container {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #000000;
+            margin-bottom: 20px;
+        }
+        textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 16px;
+            resize: vertical;
         }
         button {
-            padding: 10px 20px;
+            padding: 12px 20px;
             background-color: #007bff;
             color: white;
             border: none;
+            border-radius: 4px;
             cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #output {
+            margin-top: 20px;
+            text-align: left;
         }
         pre {
-            text-align: left;
-            background-color: #eee;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             padding: 10px;
-            border: 1px solid #ccc;
-            max-width: 80%;
-            margin: auto;
+            overflow-x: auto;
+        }
+        .alert {
+            padding: 20px;
+            border-radius: 4px;
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            margin-top: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        .center-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
         }
     </style>
 </head>
 <body>
-    <h1>Command Execution Interface</h1>
-    <form id="commandForm">
-        <textarea name="command" rows="4" placeholder="Enter command to execute..."></textarea><br>
-        <button type="submit">Execute Command</button>
-    </form>
-    <div id="output"></div>
+    <div class="sidebar">
+        <h1>Menu</h1>
+        <a href="#" onclick="showSection('home')">Home</a>
+        <a href="#" onclick="showSection('uploads')">Uploads</a>
+        <a href="#" onclick="showSection('search')">Search</a>
+
+    </div>
+    <div class="main-content">
+        <img id="welcomeImage" class="center-image" src="https://i.pinimg.com/736x/61/e4/1e/61e41efa1bf4b8dc23885c6377f1eb6b.jpg" alt="Welcome Image">
+        <div id="home" class="container hidden">
+            <h1>Remote Code Execution Vulnerability</h1>
+            <!-- Content of the Home section here -->
+            <ul>
+                <li><strong>Injection Vulnerabilities:</strong>
+                    <ul>
+                        <li><strong>SQL Injection:</strong> An attacker can inject malicious SQL queries to manipulate the database and execute arbitrary commands.</li>
+                        <li><strong>Command Injection:</strong> If a web application passes user input directly to a system shell, attackers can inject commands that the application will execute.</li>
+                    </ul>
+                </li>
+                <li><strong>Insecure Deserialization:</strong> When an application deserializes data from untrusted sources without proper validation, attackers can craft malicious data to execute code upon deserialization.</li>
+                <li><strong>File Upload Vulnerabilities:</strong> If a web application allows file uploads but does not properly validate or sanitize file content and types, attackers might upload malicious files that can be executed on the server.</li>
+                <li><strong>Insecure APIs:</strong> APIs that expose functionality without proper authentication or input validation can be exploited to execute arbitrary commands or access sensitive operations.</li>
+                <li><strong>Remote Code Execution in Web Frameworks:</strong> Some web frameworks or libraries might have flaws that allow attackers to execute arbitrary code if inputs are not properly sanitized.</li>
+                <li><strong>Misconfigurations:</strong> Misconfigured server settings, such as improper permissions or unprotected admin panels, can also lead to RCE vulnerabilities.</li>
+            </ul>
+            
+            <h2>Consequences of RCE</h2>
+            <ul>
+                <li><strong>System Compromise:</strong> Attackers can gain control over the vulnerable system, which might lead to further attacks on the network.</li>
+                <li><strong>Data Breach:</strong> Sensitive information stored on the compromised system can be accessed, stolen, or manipulated.</li>
+                <li><strong>Service Disruption:</strong> The attacker may disrupt the normal operation of the system or service, causing downtime or degraded performance.</li>
+                <li><strong>Spread of Malware:</strong> Attackers might use RCE to install malware or other malicious software on the system.</li>
+            </ul>
+            <h2>Examples of RCE Vulnerabilities</h2>
+            <div class="example">
+                <h3>Command Injection Example:</h3>
+                <pre>An application that allows users to input search terms for a file and then uses this input in a shell command without proper sanitization might be vulnerable to command injection.</pre>
+            </div>
+            <div class="example">
+                <h3>File Upload Example:</h3>
+                <pre>An application that allows file uploads and executes uploaded files directly can be exploited if the attacker uploads a script or executable that the server executes.</pre>
+            </div>
+            
+            <h2>Mitigation Strategies</h2>
+            <ul>
+                <li><strong>Input Validation:</strong> Always validate and sanitize user inputs to ensure they conform to expected formats and do not contain malicious code.</li>
+                <li><strong>Use Parameterized Queries:</strong> For SQL queries, use parameterized queries or prepared statements to prevent SQL injection attacks.</li>
+                <li><strong>Secure File Uploads:</strong> Validate file types and content before processing uploads. Implement strict access controls on uploaded files.</li>
+                <li><strong>Limit Permissions:</strong> Run applications with the minimum necessary privileges to reduce the impact of a potential compromise.</li>
+                <li><strong>Patch and Update:</strong> Regularly update software and libraries to patch known vulnerabilities.</li>
+                <li><strong>Security Reviews and Testing:</strong> Conduct regular security assessments, code reviews, and penetration testing to identify and address potential vulnerabilities.</li>
+            </ul>
+        </div>
+        <div id="uploads" class="container hidden">
+            <h1>File Upload</h1>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <input type="file" name="file" required><br>
+                <button type="submit">Upload File</button>
+            </form>
+        </div>
+        <div id="search" class="container hidden">
+            <h1>Command Execution Interface</h1>
+            <form id="commandForm">
+                <textarea name="command" rows="4" placeholder="Enter command to execute..."></textarea><br>
+                <button type="submit">Execute Command</button>
+            </form>
+            <div id="output"></div>
+        </div>
+    </div>
 
     <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.main-content .container');
+            const image = document.getElementById('welcomeImage');
+
+            // Hide all sections
+            sections.forEach(section => {
+                if (section.id === sectionId) {
+                    section.classList.remove('hidden');
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+
+            // Hide the welcome image
+            if (image) {
+                image.style.display = 'none';
+            }
+        }
+
         document.getElementById('commandForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -59,11 +230,42 @@
                 });
                 
                 const result = await response.text();
-                document.getElementById('output').innerHTML = result;
+                document.getElementById('output').innerHTML = `<pre>${result}</pre>`;
             } catch (error) {
-                document.getElementById('output').innerHTML = `<h1>Error</h1><pre>${error.message}</pre>`;
+                document.getElementById('output').innerHTML = `<div class="alert"><strong>Error:</strong> ${error.message}</div>`;
+            }
+        });
+
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.text();
+                alert('File uploaded successfully');
+            } catch (error) {
+                alert('Error uploading file');
             }
         });
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
