@@ -6,7 +6,7 @@
     <title>Vulnerable Web Application</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-     body {
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -65,7 +65,7 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 1.2em;
-            transition: background-color 1s, transform 2s; /* Transition duration set to 0.2 seconds */
+            transition: background-color 0s, transform 2s; /* Transition duration set to 0.2 seconds */
             box-shadow: 0 4px 6px rgba(196, 18, 18, 0.1);
         }
 
@@ -73,7 +73,6 @@
             background-color: transparent;
             transform: translateY(-2px);
             color: rgb(252, 252, 252);
-        
         }
 
         footer {
@@ -92,27 +91,22 @@
         }
 
         /* Adjust layout of the login and register buttons */
-     /* Container for the nav buttons and logo */
+        .nav-buttons {
+            display: flex;
+            position: relative;
+            gap: 10px; /* Optional: space between buttons */
+            top: 20px;
+        }
 
-
-/* Adjust layout of the login and register buttons */
-.nav-buttons {
-    display: flex;
-    position: relative;
-    gap: 10px; /* Optional: space between buttons */
-    top: 20px;
-}
-
-/* Style for the logo image */
-.logo {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%; /* Make it circular */
-    border-color: #4cdb47;
-    object-fit: cover;
-    margin-left: auto; /* This pushes the logo to the right */
-}
-
+        /* Style for the logo image */
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%; /* Make it circular */
+            border-color: #4cdb47;
+            object-fit: cover;
+            margin-left: auto; /* This pushes the logo to the right */
+        }
     </style>
 </head>
 <body>
@@ -129,31 +123,42 @@
             <a href="/dashboard" class="btn btn-primary">Dashboard</a>
             <a href="/" class="btn btn-secondary">Home</a>
             <img src="dashboard-logo.jpg" alt="Dashboard Logo" href="/" class="logo"> <!-- Circular logo image -->
-
         </div>
-     </div>   
+    </div>
 
     <div class="button-container">
-      <b>  <h1>Top 10 Vulnerability tasks </b><br> 2023</h1> <!-- Logo will be displayed as a background image -->
-      
+        <b><h1>Top 10 Vulnerability Tasks <br> 2023</h1></b>
 
-
-    <button onclick="window.open('/dashboard?task=bac', '_blank')" class="vuln-button">Broken Access Control</button>
-    <button onclick="window.open('/dashboard?task=cgf', '_blank')" class="vuln-button">Cryptographic Failures</button>
-    <button onclick="window.open('/dashboard?task=ijn', '_blank')" class="vuln-button">Injection</button>
-    <button onclick="window.open('/dashboard?task=isd', '_blank')" class="vuln-button">Insecure Design</button>
-    <button onclick="window.open('/dashboard?task=smc', '_blank')" class="vuln-button">Security Misconfiguration</button>
-    <button onclick="window.open('/dashboard?task=voc', '_blank')" class="vuln-button">Vulnerable and Outdated Components</button>
-    <button onclick="window.open('/dashboard?task=iaf', '_blank')" class="vuln-button">Identification and Authentication Failures</button>
-    <button onclick="window.open('/dashboard?task=sdif', '_blank')" class="vuln-button">Software and Data Integrity Failures</button>
-    <button onclick="window.open('/dashboard?task=slmf', '_blank')" class="vuln-button">Security Logging and Monitoring Failures</button>
-    <button onclick="window.open('/dashboard?task=ssrf', '_blank')" class="vuln-button">Server-Side Request Forgery (SSRF)</button>
+        <!-- Vulnerability buttons -->
+        <button onclick="window.open('/dashboard?task=bac', '_blank')" class="vuln-button">Broken Access Control</button>
+        <button onclick="window.open('/dashboard?task=cgf', '_blank')" class="vuln-button">Cryptographic Failures</button>
+        <button onclick="window.open('/dashboard?task=ijn', '_blank')" class="vuln-button">Injection</button>
+        <button onclick="window.open('/dashboard?task=isd', '_blank')" class="vuln-button">Insecure Design</button>
+        <button onclick="window.open('/dashboard?task=smc', '_blank')" class="vuln-button">Security Misconfiguration</button>
+        <button onclick="window.open('/dashboard?task=voc', '_blank')" class="vuln-button">Vulnerable and Outdated Components</button>
+        <button onclick="window.open('/dashboard?task=iaf', '_blank')" class="vuln-button">Identification and Authentication Failures</button>
+        <button onclick="window.open('/dashboard?task=sdif', '_blank')" class="vuln-button">Software and Data Integrity Failures</button>
+        <button onclick="window.open('/dashboard?task=slmf', '_blank')" class="vuln-button">Security Logging and Monitoring Failures</button>
+        <button onclick="window.open('/dashboard?task=ssrf', '_blank')" class="vuln-button">Server-Side Request Forgery (SSRF)</button>
+    </div>
 
     <footer>
         <p>&copy; 2024 Vulnerable Web Application. All Rights Reserved.</p>
     </footer>
 
+    <!-- JavaScript to play sound on hover -->
+    <!-- Corrected path to the sound file -->
+    <audio id="hoverSound" src="ting-sound.mp3" preload="auto"></audio>
+    <script>
+        const buttons = document.querySelectorAll('.vuln-button');
+        const hoverSound = document.getElementById('hoverSound');
+
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                hoverSound.currentTime = 0;  // Rewind the sound to the start
+                hoverSound.play();
+            });
+        });
+    </script>
 </body>
 </html>
-
-
