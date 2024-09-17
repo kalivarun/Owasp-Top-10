@@ -4,7 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const { Pool } = require('pg'); // PostgreSQL module
 const crypto = require('crypto'); // For hashing passwords using MD5
-const basicAuth = require('basic-auth');
+
 const app = express();
 const { exec } = require('child_process'); 
 
