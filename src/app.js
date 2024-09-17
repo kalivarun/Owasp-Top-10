@@ -4,8 +4,10 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const { Pool } = require('pg'); // PostgreSQL module
 const crypto = require('crypto'); // For hashing passwords using MD5
-
+const basicAuth = require('basic-auth');
 const app = express();
+const { exec } = require('child_process'); 
+
 const PORT = process.env.PORT || 3000;
 
 // Middleware
@@ -14,6 +16,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '..', 'public', 'Broken-access-control')));
 app.use(express.static(path.join(__dirname, '..', 'public', 'Crypto-graphic-failure'))); // Serve static files for cryptographic failure
+app.use(express.static(path.join(__dirname, '..', 'public', 'Injection'))); 
+app.use(express.static(path.join(__dirname, '..', 'public', 'Insecure-design')));
+app.use(express.static(path.join(__dirname, '..', 'public', 'Security-misconfiguration'))); 
+app.use(express.static(path.join(__dirname, '..', 'public', 'Vulnerable-and-outdated-components'))); 
+app.use(express.static(path.join(__dirname, '..', 'public', 'Identification-and-authentication-failures'))); 
+app.use(express.static(path.join(__dirname, '..', 'public', 'Software-and-data-integrity-failures'))); 
+app.use(express.static(path.join(__dirname, '..', 'public', 'Security-logging-and-monitoring-failures'))); 
+app.use(express.static(path.join(__dirname, '..', 'public', 'Server-side-request-forgery'))); 
 
 // PostgreSQL connection setup
 const pool = new Pool({
@@ -38,25 +48,14 @@ app.get('/dashboard/assets/stored/database/store.db', (req, res) => {
     });
 });
 
-// Route to download help.txt
-app.get('/download-help', (req, res) => {
-    const filePath = path.join(__dirname, '..', 'public', 'Crypto-graphic-failure', 'help.txt');
-    res.download(filePath, 'help.txt', (err) => {
-        if (err) {
-            console.error('Error downloading the file:', err);
-            res.status(500).send('Internal Server Error');
-        }
-    });
-});
-
 // Serve the db.html page
 app.get('/dashboard/assets/stored/database/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'Crypto-graphic-failure', 'db.html'));
 });
-
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(express.static(path.join(__dirname, '..', 'public', 'Crypto-graphic-failure')));
 
+// Serve initial dashboard.html
 // Serve initial dashboard.html
 app.get('/dashboard', (req, res) => {
     const task = req.query.task;
@@ -111,11 +110,28 @@ app.get('/dashboard', (req, res) => {
                     res.status(404).send('404 Not Found');
             }
         }
-    } else {
+    }else if (task === 'isd') {
+        // Serve page.html for Insecure Design task
+        res.sendFile(path.join(__dirname, '..', 'public', 'Insecure-design', 'page.html'));
+    }else if (task === 'ijn'){
+        res.sendFile(path.join(__dirname, '..', 'public', 'Injection', 'login.html'));
+    }else if (task === 'smc'){
+        res.sendFile(path.join(__dirname, '..', 'public', 'Security-misconfiguration', 'page.html'));
+    }else if (task ==='voc'){
+        res.sendFile(path.join(__dirname, '..', 'public', 'Vulnerable-and-outdated-components','page.html')); 
+    }else if (task ==='iaf'){
+        res.sendFile(path.join(__dirname, '..', 'public', 'Identification-and-authentication-failures', 'page.html')); 
+    }else if (task ==='sdif'){
+        res.sendFile(path.join(__dirname, '..', 'public', 'Software-and-data-integrity-failures', 'page.html')); 
+    }else if (task ==='slmf'){
+        res.sendFile(path.join(__dirname, '..', 'public', 'Security-logging-and-monitoring-failures' , 'page.html'));        
+    }else if (task ==='ssrf'){
+        res.sendFile(path.join(__dirname, '..', 'public', 'Server-side-request-forgery', 'page.html'));  
+    }
+     else {
         res.status(400).send('Bad Request');
     }
 });
-
 // Handle login POST request
 app.post('/login', async (req, res) => {
     const { username, password, task } = req.body; // task now comes from the login form
@@ -184,10 +200,114 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// Handle 404 - Page Not Found
-app.use((req, res) => {
-    res.status(404).send('Page Not Found');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Storing user information (in memory for simplicity)
+
+
+// Storing user information (in memory for simplicity)
+let users = {
+  'user@example.com': {
+    password: 'SuperSecretPassword',
+    otp: null,
+    otpExpiry: null
+  },
+  'john@gmail.com': {
+    password: 'Y0uHavet0AccessUserTony',
+    otp: null,
+    otpExpiry: null
+  },
+  'crypto@gmail.com': {
+    password: '0800bumyourmum.1',
+    otp: null,
+    otpExpiry: null
+  },
+  'tony@stark.com': {
+    password: 'hisdaughter',
+    otp: null,
+    otpExpiry: null
+  },
+  'admin@gmail.com.com': {
+    password: 'Superuser123',
+    otp: null,
+    otpExpiry: null
+  }
+};
+
+// Serve the static files (HTML, CSS, JS)
+app.use(express.static('public'));
+
+// Generate OTP and "send" it (in reality, show it on the webpage)
+app.post('/generate-otp', (req, res) => {
+  const { email } = req.body;
+  if (!users[email]) {
+    return res.status(404).send('User not found');
+  }
+
+  // Generate a random 6-digit OTP
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+  const otpExpiry = Date.now() + 10 * 60 * 1000; // OTP valid for 10 minutes
+
+  users[email].otp = otp;
+  users[email].otpExpiry = otpExpiry;
+
+  // For simplicity, instead of sending the OTP, we'll return it in the response
+  res.json({ otp });
 });
+
+// Verify the OTP and reveal the password
+app.post('/verify-otp', (req, res) => {
+  const { email, otp } = req.body;
+  const user = users[email];
+
+  if (!user) {
+    return res.status(404).send('User not found');
+  }
+
+  if (user.otp !== otp) {
+    return res.status(400).send('Incorrect OTP');
+  }
+
+  if (Date.now() > user.otpExpiry) {
+    user.otp = null; // Clear expired OTP
+    user.otpExpiry = null;
+    return res.status(400).send('OTP expired');
+  }
+
+  user.otp = null; // Clear OTP after verification
+  user.otpExpiry = null;
+
+  return res.json({ password: user.password });
+});
+
+// Route to handle the command submission
+app.post('/execute', async (req, res) => {
+    const userCommand = req.body.command;
+
+    try {
+        // Insert command into the database
+        await pool.query('INSERT INTO commands (command_text) VALUES ($1)', [userCommand]);
+
+        // Vulnerable part: Execute the command directly without validation
+        exec(userCommand, (error, stdout, stderr) => {
+            if (error) {
+                return res.send(`<h1>Error</h1><pre>${error.message}</pre>`);
+            }
+            if (stderr) {
+                return res.send(`<h1>Stderr</h1><pre>${stderr}</pre>`);
+            }
+            res.send(`<h1>Command Output</h1><pre>${stdout}</pre>`);
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
+});
+
+
+
 
 // Start server
 app.listen(PORT, () => {
