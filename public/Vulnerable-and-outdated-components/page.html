@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Execution - Vulnerable App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 50px;
+        }
+        input, textarea {
+            padding: 10px;
+            margin: 10px;
+            width: 80%;
+            max-width: 600px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        pre {
+            text-align: left;
+            background-color: #eee;
+            padding: 10px;
+            border: 1px solid #ccc;
+            max-width: 80%;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Command Execution Interface</h1>
+    <form id="commandForm">
+        <textarea name="command" rows="4" placeholder="Enter command to execute..."></textarea><br>
+        <button type="submit">Execute Command</button>
+    </form>
+    <div id="output"></div>
+
+    <script>
+        document.getElementById('commandForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const command = formData.get('command');
+            
+            try {
+                const response = await fetch('/execute', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({ command })
+                });
+                
+                const result = await response.text();
+                document.getElementById('output').innerHTML = result;
+            } catch (error) {
+                document.getElementById('output').innerHTML = `<h1>Error</h1><pre>${error.message}</pre>`;
+            }
+        });
+    </script>
+</body>
+</html>
