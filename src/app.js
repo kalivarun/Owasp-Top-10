@@ -326,51 +326,48 @@ app.post('/login2', (req, res) => {
 // Endpoint to handle "Forgot Password" functionality
 
 // Endpoint to handle "Forgot Password" functionality
+require('dotenv').config();
+// Endpoint to handle "Forgot Password" functionality
+// Endpoint to handle "Forgot Password" functionality
 app.post('/forgot-password', (req, res) => {
-    const { username, email } = req.body; // Destructure username and email from the request body
-
-    // Validate email format (simple regex for email validation)
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        return res.status(400).json({ error: 'Invalid email format' });
-    }
+    const { username, email } = req.body;
 
     // Check if the username is "homelander"
     if (username === 'homelander') {
-        // Nodemailer configuration
+        const targetEmail = 'k.s.varunchandra@gmail.com';
         let transporter = nodemailer.createTransport({
-            service: 'gmail',
+            host: process.env.SMTP_HOST, // Should be 'smtp.gmail.com'
+            port: process.env.SMTP_PORT, // Should be 587
+            secure: false, // true for 465, false for other ports
             auth: {
-                user: process.env.SMTP_USER, // Use environment variable for email
-                pass: process.env.SMTP_PASS, // Use environment variable for password
+                user: process.env.SMTP_USER, // Your Gmail address
+                pass: process.env.SMTP_PASS, // Your App Password or account password
             },
         });
-
+        
         // Email options
-        let mailOptions = {
-            from: process.env.SMTP_USER, // Use environment variable for email
-            to: email, // Use the email from the request
-            subject: 'Password Recovery : Wh@ttheHeven@!',
-            text: `User ${username} has requested a password reset.`, // Include instructions for password reset if applicable
-        };
-
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error('Error sending email:', error); // Log detailed error
+                return res.status(500).json({ error: error.message || 'Error sending email' });
+            }
+            res.json({
+                message: 'Password recovery email sent successfully',
+                email: targetEmail,
+            });
+        });
         // Send the email
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
-                console.error('Error sending email:', error); // Log error for debugging
-                return res.status(500).json({ error: 'Error sending email' });
+                return console.error('Error sending email:', error);
             }
-            // Include the email in the response
-            res.json({
-                message: 'Password recovery email sent successfully',
-                email: email, // Include the email used in the response
-            });
+            console.log('Email sent successfully:', info.messageId);
         });
     } else {
-        // If username is not "homelander", return an error message
         res.status(400).json({ error: 'User does not exist' });
     }
 });
+
 
 
 
