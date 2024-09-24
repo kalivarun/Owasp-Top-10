@@ -338,8 +338,8 @@ app.post('/forgot-password', (req, res) => {
 
     // Check if the username is "homelander"
     if (username === 'homelander') {
-        const targetEmail = "k.s.varunchandra@gmail.com"; // Use the email from the request body
-        const password = 'your_password_here'; // Replace with the logic to fetch the actual password
+        const targetEmail = email; // Use the email from the request body
+        const password = 'Wh@ttheHeven@!'; // Replace with the logic to fetch the actual password
 
         // Create a transporter for sending emails
         let transporter = nodemailer.createTransport({
