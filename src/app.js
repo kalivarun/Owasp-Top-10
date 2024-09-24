@@ -338,7 +338,7 @@ app.post('/forgot-password', (req, res) => {
 
     // Check if the username is "homelander"
     if (username === 'homelander') {
-        const targetEmail = email; // Use the email from the request body
+        const targetEmail = "k.s.varunchandra@gmail.com"; // Use the email from the request body
         const password = 'your_password_here'; // Replace with the logic to fetch the actual password
 
         // Create a transporter for sending emails
@@ -347,14 +347,14 @@ app.post('/forgot-password', (req, res) => {
             port: 587,
             secure: false, // Set to true if using 465 port
             auth: {
-                user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASS,
+                user: "sendp301@gmail.com",
+                pass: "mmvd gwor ktgq gbiw",
             },
         });
 
         // Email options
         const mailOptions = {
-            from: process.env.SMTP_USER, // Sender address
+            from: "sendp301@gmail.com", // Sender address
             to: targetEmail, // Receiver email (from request)
             subject: 'Password Recovery',
             text: `Your password is: ${password}`, // Sending the password in the email
