@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Forgot Password</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #forgot-password {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        #forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        #message, #error {
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        #error {
+            color: red;
+        }
+
+        #message {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <div id="content">
+            <!-- Default content is the login form -->
+            <h2>Login</h2>
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input type="text" id="login-username" placeholder="Enter your username">
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter your password">
+            </div>
+            <button id="login-btn">Login</button>
+            <a id="forgot-password">Forgot Password?</a>
+        </div>
+
+        <!-- Success/Error messages -->
+        <div id="message" style="display: none;"></div>
+        <div id="error" style="display: none;"></div>
+    </div>
+
+    <script>
+        const content = document.getElementById('content');
+        const message = document.getElementById('message');
+        const error = document.getElementById('error');
+
+        // Handle "Forgot Password?" click
+        document.getElementById('forgot-password').addEventListener('click', function() {
+            content.innerHTML = `
+                <h2>Forgot Password</h2>
+                <div class="input-group">
+                    <label for="forgot-username">Username:</label>
+                    <input type="text" id="forgot-username" placeholder="Enter your username">
+                </div>
+                <button id="forgot-password-btn">Submit</button>
+                <a id="back-to-login">Back to Login</a>
+            `;
+
+            // Handle "Submit" for forgot password
+            document.getElementById('forgot-password-btn').addEventListener('click', function() {
+                const username = document.getElementById('forgot-username').value;
+
+                // Send the request to the server
+                fetch('/forgot-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        error.textContent = data.error;
+                        error.style.display = 'block';
+                        message.style.display = 'none';
+                    } else {
+                        message.textContent = data.message;
+                        message.style.display = 'block';
+                        error.style.display = 'none';
+                    }
+                })
+                .catch(err => {
+                    error.textContent = 'An error occurred.';
+                    error.style.display = 'block';
+                    message.style.display = 'none';
+                });
+            });
+
+            // Handle "Back to Login" click
+            document.getElementById('back-to-login').addEventListener('click', function() {
+                loadLoginForm();
+            });
+        });
+
+        // Function to reload the login form
+        function loadLoginForm() {
+            content.innerHTML = `
+                <h2>Login</h2>
+                <div class="input-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="login-username" placeholder="Enter your username">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" placeholder="Enter your password">
+                </div>
+                <button id="login-btn">Login</button>
+                <a id="forgot-password">Forgot Password?</a>
+            `;
+
+            // Re-attach forgot password event
+            document.getElementById('forgot-password').addEventListener('click', function() {
+                // Same as initial forgot password click
+                document.getElementById('forgot-password').click();
+            });
+        }
+    </script>
+
+</body>
+</html>
