@@ -343,8 +343,8 @@ app.post('/forgot-password', (req, res) => {
 
         // Create a transporter for sending emails
         let transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST,
-            port: process.env.SMTP_PORT,
+            host: "smpt.gmail.com",
+            port: 587,
             secure: false, // Set to true if using 465 port
             auth: {
                 user: process.env.SMTP_USER,
