@@ -4,6 +4,9 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const { Pool } = require('pg'); // PostgreSQL module
 const crypto = require('crypto'); // For hashing passwords using MD5
+const basicAuth = require('basic-auth');
+const { exec } = require('child_process'); 
+const nodemailer = require('nodemailer');
 
 const app = express();
 const { exec } = require('child_process'); 
@@ -305,6 +308,64 @@ app.post('/execute', async (req, res) => {
         res.status(500).send('Server error');
     }
 });
+
+
+// Endpoint to handle login functionality
+app.post('/login2', (req, res) => {
+    const { username, password } = req.body;
+
+    // Check credentials
+    if (username === 'homelander' && password === 'Wh@ttheHeven@!') {
+        // Successful login
+        res.json({ message: 'Login successful', redirect: '/dashboard?task=iaf&loggedin=true' });
+    } else {
+        // Incorrect credentials
+        res.status(401).json({ error: 'Invalid username or password' });
+    }
+});
+
+// Endpoint to handle "Forgot Password" functionality
+app.post('/forgot-password', (req, res) => {
+    const username = req.body.username;
+    const email = req.body.email; // Get email from request body
+
+    // Check if the username is "homelander"
+    if (username === 'homelander') {
+        // Nodemailer configuration
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'sendp301@gmail.com', // Your email
+                pass: 'mmvd gwor ktgq gbiw', // Your email password
+            },
+        });
+
+        // Email options
+        let mailOptions = {
+            from: 'sendp301@gmail.com', // Your email
+            to: email, // Use the email from the request
+            subject: 'Password Recovery : Wh@ttheHeven@!',
+            text: `User ${username} has requested a password reset.`,
+        };
+
+        // Send the email
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return res.status(500).json({ error: 'Error sending email' });
+            }
+            // Include the email in the response
+            res.json({
+                message: 'Password recovery email sent successfully',
+                email: email, // Include the email used in the response
+            });
+        });
+    } else {
+        // If username is not "homelander", return an error message
+        res.status(400).json({ error: 'User does not exist' });
+    }
+});
+
+
 
 
 
