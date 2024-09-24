@@ -324,9 +324,16 @@ app.post('/login2', (req, res) => {
 });
 
 // Endpoint to handle "Forgot Password" functionality
+
+// Endpoint to handle "Forgot Password" functionality
 app.post('/forgot-password', (req, res) => {
-    const username = req.body.username;
-    const email = req.body.email; // Get email from request body
+    const { username, email } = req.body; // Destructure username and email from the request body
+
+    // Validate email format (simple regex for email validation)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        return res.status(400).json({ error: 'Invalid email format' });
+    }
 
     // Check if the username is "homelander"
     if (username === 'homelander') {
@@ -334,22 +341,23 @@ app.post('/forgot-password', (req, res) => {
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'sendp301@gmail.com', // Your email
-                pass: 'mmvd gwor ktgq gbiw', // Your email password
+                user: process.env.SMTP_USER, // Use environment variable for email
+                pass: process.env.SMTP_PASS, // Use environment variable for password
             },
         });
 
         // Email options
         let mailOptions = {
-            from: 'sendp301@gmail.com', // Your email
+            from: process.env.SMTP_USER, // Use environment variable for email
             to: email, // Use the email from the request
             subject: 'Password Recovery : Wh@ttheHeven@!',
-            text: `User ${username} has requested a password reset.`,
+            text: `User ${username} has requested a password reset.`, // Include instructions for password reset if applicable
         };
 
         // Send the email
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
+                console.error('Error sending email:', error); // Log error for debugging
                 return res.status(500).json({ error: 'Error sending email' });
             }
             // Include the email in the response
@@ -363,9 +371,6 @@ app.post('/forgot-password', (req, res) => {
         res.status(400).json({ error: 'User does not exist' });
     }
 });
-
-
-
 
 
 
