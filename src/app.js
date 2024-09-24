@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const { Pool } = require('pg'); // PostgreSQL module
 const crypto = require('crypto'); // For hashing passwords using MD5
 const basicAuth = require('basic-auth');
-const { exec } = require('child_process'); 
 const nodemailer = require('nodemailer');
 
 const app = express();
