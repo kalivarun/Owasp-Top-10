@@ -6,6 +6,7 @@ const { Pool } = require('pg'); // PostgreSQL module
 const crypto = require('crypto'); // For hashing passwords using MD5
 const basicAuth = require('basic-auth');
 const nodemailer = require('nodemailer');
+require('dotenv').config({ path: '../.env' });
 
 const app = express();
 const { exec } = require('child_process'); 
@@ -326,7 +327,7 @@ app.post('/login2', (req, res) => {
 // Endpoint to handle "Forgot Password" functionality
 
 // Endpoint to handle "Forgot Password" functionality
-require('dotenv').config();
+
 // Endpoint to handle "Forgot Password" functionality
 // Endpoint to handle "Forgot Password" functionality
 app.post('/forgot-password', (req, res) => {
