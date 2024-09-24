@@ -337,13 +337,15 @@ app.post('/forgot-password', (req, res) => {
 
     // Check if the username is "homelander"
     if (username === 'homelander') {
-        const targetEmail = "k.s.varunchandra@gmail.com"; // Use the email from the request body
-        const password = 'your_password_here'; // Replace with the logic to fetch the actual password
-        
+        // Use the email from the request body
+        const targetEmail = email; // This should be provided in the request
+        // Replace with your actual logic to fetch the password or a reset link
+        const resetLink = `https://yourdomain.com/reset-password?user=${username}`; 
+
         let transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
             port: process.env.SMTP_PORT,
-            secure: false,
+            secure: false, // Set to true if using port 465
             auth: {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASS,
@@ -355,14 +357,14 @@ app.post('/forgot-password', (req, res) => {
             from: process.env.SMTP_USER, // Sender address
             to: targetEmail, // Receiver email (from request)
             subject: 'Password Recovery',
-            text: `Your password is: ${password}`, // Sending the password in the email
+            text: `To reset your password, click the following link: ${resetLink}`, // Sending a password reset link
         };
 
         // Send the email
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 console.error('Error sending email:', error);
-                return res.status(500).json({ error: error.message || 'Error sending email' });
+                return res.status(500).json({ error: 'Error sending email' });
             }
             res.json({
                 message: 'Password recovery email sent successfully',
