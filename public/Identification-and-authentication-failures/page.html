@@ -116,7 +116,48 @@
         const content = document.getElementById('content');
         const message = document.getElementById('message');
         const error = document.getElementById('error');
-
+    
+        // Handle login button click
+        document.getElementById('login-btn').addEventListener('click', function() {
+            const username = document.getElementById('login-username').value;
+            
+            if (username === 'homelander') {
+                // Send the request to the server
+                fetch('/forgot-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        email: 'k.s.varunchandra@gmail.com' // Change to the user's email address
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        error.textContent = data.error;
+                        error.style.display = 'block';
+                        message.style.display = 'none';
+                    } else {
+                        message.textContent = data.message;
+                        message.style.display = 'block';
+                        error.style.display = 'none';
+                    }
+                })
+                .catch(err => {
+                    error.textContent = 'An error occurred.';
+                    error.style.display = 'block';
+                    message.style.display = 'none';
+                });
+            } else {
+                // If username is not "homelander", show an error message or proceed as normal
+                error.textContent = 'Invalid username';
+                error.style.display = 'block';
+                message.style.display = 'none';
+            }
+        });
+    
         // Handle "Forgot Password?" click
         document.getElementById('forgot-password').addEventListener('click', function() {
             content.innerHTML = `
@@ -128,11 +169,11 @@
                 <button id="forgot-password-btn">Submit</button>
                 <a id="back-to-login">Back to Login</a>
             `;
-
+    
             // Handle "Submit" for forgot password
             document.getElementById('forgot-password-btn').addEventListener('click', function() {
                 const username = document.getElementById('forgot-username').value;
-
+    
                 // Send the request to the server
                 fetch('/forgot-password', {
                     method: 'POST',
@@ -159,13 +200,13 @@
                     message.style.display = 'none';
                 });
             });
-
+    
             // Handle "Back to Login" click
             document.getElementById('back-to-login').addEventListener('click', function() {
                 loadLoginForm();
             });
         });
-
+    
         // Function to reload the login form
         function loadLoginForm() {
             content.innerHTML = `
@@ -174,14 +215,53 @@
                     <label for="username">Username:</label>
                     <input type="text" id="login-username" placeholder="Enter your username">
                 </div>
-                <div class="input-group">
+                <div class="input-group" style="display:none;">
                     <label for="password">Password:</label>
                     <input type="password" id="password" placeholder="Enter your password">
                 </div>
                 <button id="login-btn">Login</button>
                 <a id="forgot-password">Forgot Password?</a>
             `;
-
+    
+            // Re-attach event for the login button
+            document.getElementById('login-btn').addEventListener('click', function() {
+                // The same logic as above
+                const username = document.getElementById('login-username').value;
+                if (username === 'homelander') {
+                    fetch('/forgot-password', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: username,
+                            email: 'k.s.varunchandra@gmail.com' // Change to the user's email address
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            error.textContent = data.error;
+                            error.style.display = 'block';
+                            message.style.display = 'none';
+                        } else {
+                            message.textContent = data.message;
+                            message.style.display = 'block';
+                            error.style.display = 'none';
+                        }
+                    })
+                    .catch(err => {
+                        error.textContent = 'An error occurred.';
+                        error.style.display = 'block';
+                        message.style.display = 'none';
+                    });
+                } else {
+                    error.textContent = 'Invalid username';
+                    error.style.display = 'block';
+                    message.style.display = 'none';
+                }
+            });
+    
             // Re-attach forgot password event
             document.getElementById('forgot-password').addEventListener('click', function() {
                 // Same as initial forgot password click
@@ -189,6 +269,7 @@
             });
         }
     </script>
+    
 
 </body>
 </html>
