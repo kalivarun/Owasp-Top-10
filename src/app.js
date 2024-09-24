@@ -338,13 +338,14 @@ app.post('/forgot-password', (req, res) => {
 
     // Check if the username is "homelander"
     if (username === 'homelander') {
-        const targetEmail = "k.s.varunchandra@gmail.com"; // Use the email from the request body
+        const targetEmail = email; // Use the email from the request body
         const password = 'your_password_here'; // Replace with the logic to fetch the actual password
-        
+
+        // Create a transporter for sending emails
         let transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
             port: process.env.SMTP_PORT,
-            secure: false,
+            secure: false, // Set to true if using 465 port
             auth: {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASS,
@@ -362,7 +363,7 @@ app.post('/forgot-password', (req, res) => {
         // Send the email
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
-                console.error('Error sending email:', error);
+                console.error('Error sending email:', error); // Log the error for debugging
                 return res.status(500).json({ error: error.message || 'Error sending email' });
             }
             res.json({
@@ -374,6 +375,7 @@ app.post('/forgot-password', (req, res) => {
         res.status(400).json({ error: 'User does not exist' });
     }
 });
+
 // Now you can access your environment variables
 const smtpUser = process.env.SMTP_USER;
 const smtpPass = process.env.SMTP_PASS;
