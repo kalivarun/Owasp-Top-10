@@ -396,8 +396,8 @@ app.post('/forgot-password', (req, res) => {
         const password = 'Wh@ttheHeven@!'; // Replace with the logic to fetch the actual password
         
         let transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST,
-            port: process.env.SMTP_PORT,
+            host: "smtp.gmail.com",
+            port: 587,
             secure: false,
             auth: {
                 user:"sendp@gmail.com",
@@ -407,7 +407,7 @@ app.post('/forgot-password', (req, res) => {
 
         // Email options
         const mailOptions = {
-            from: process.env.SMTP_USER, // Sender address
+            from: "sendp@gmail.com", // Sender address
             to: targetEmail, // Receiver email (from request)
             subject: 'Password Recovery',
             text: `Your password is: ${password}`, // Sending the password in the email
