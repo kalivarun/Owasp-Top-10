@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superheroes</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure the body takes at least the full height of the viewport */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        main {
+            flex: 1; /* This will allow the main content to grow and push the footer down */
+            padding: 20px;
+            display: flex; /* Add flexbox to main for layout */
+        }
+
+        section {
+            flex: 1; /* Allow superhero list to take space */
+            display: none;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            flex: 1; /* Allow description to take space */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            margin-left: 20px; /* Space between the superhero list and the description */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333;
+            color: #fff;
+            position: relative; /* Change this to relative */
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Style for the active section */
+        .active {
+            display: block;
+        }
+
+        /* Styles for the superhero list */
+        .superhero-list {
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            padding: 10px 0;
+        }
+
+        .superhero {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px; /* Space between superheroes */
+        }
+
+        .superhero img {
+            width: 100px; /* Increase image size */
+            height: 100px; /* Increase image size */
+            margin-right: 20px; /* Space between image and name */
+        }
+
+        .superhero span {
+            font-size: 24px; /* Increase font size */
+        }
+
+        .description img {
+            width: 100%; /* Make the description image responsive */
+            max-width: 300px; /* Set a max width */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 20px; /* Space below the image */
+        }
+
+        .description p {
+            font-size: 18px; /* Increase font size for description */
+            text-align: center; /* Center the text */
+        }
+      
+.large-image {
+    width: 100%; /* Make the image responsive to its container */
+    max-width: 800px; /* Increase the maximum width to your desired size */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensures it behaves like a block element */
+    margin: 0 auto; /* Center the image if it's not full width */
+}
+
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Superheroes</h1>
+        <nav>
+            <ul>
+                <li><a onclick="showSection('superheroes')">List of Superheroes</a></li>
+                <li><a onclick="showSection('about')">About the United States</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="superheroes" class="active">
+            <h2>List of Superheroes</h2>
+            <div class="superhero-list">
+                <div class="superhero">
+                    <img src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2020/10/Black-Noir-Strength-The-Boys.jpg" alt="Black Noir">
+                    <span>Black Noir</span>
+                </div>
+                <div class="superhero">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/e/ed/Annie_January_Erin_Moriarty.webp" alt="Starlight">
+                    <span>Starlight</span>
+                </div>
+                <div class="superhero">
+                    <img src="https://i2.wp.com/static.wikia.nocookie.net/speedsters/images/5/53/A-Train_Show.webp/revision/latest?cb=20220709023351" alt="A-Train">
+                    <span>A-Train</span>
+                </div>
+                <div class="superhero">
+                    <img src="https://img.ecartelera.com/noticias/77900/77911-h3.jpg" alt="Soldier Boy">
+                    <span>Soldier Boy</span>
+                </div>
+                <div class="superhero">
+                    <img src="https://mediaproxy.salon.com/width/1200/https://media2.salon.com/2020/09/the-boys-stormfront-0923201.jpg" alt="Stormfront">
+                    <span>Stormfront</span>
+                </div>
+                <div class="superhero">
+                    <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2020/10/The-Boys-Lamplighter-Comics.jpg" alt="Lamplighter">
+                    <span>Lamplighter</span>
+                </div>
+                <div class="superhero">
+                    <img src="https://images.immediate.co.uk/production/volatile/sites/3/2022/06/THBYS2GALLERYMINCHIN0386wk3-26500c1.jpg?quality=90&resize=980,654" alt="Queen Maeve">
+                    <span>Queen Maeve</span>
+                </div>
+                <div class="superhero">
+                    <img src="https://www.tomsguide.fr/content/uploads/sites/2/2023/11/The-Boys-Homelander-Antony-Starr-Mortal-Kombat-1.jpg" alt="Homelander">
+                    <span>Homelander</span>
+                </div>
+            </div>
+        </section>
+        
+        <div class="description">
+            <img src="https://images.squarespace-cdn.com/content/v1/52c9d908e4b0e87887310693/1565967081148-BCQKKYYC6MTPLX9TGT98/Boys_s01e02_04.png" alt="Superhero Image" class="large-image">
+            <h2>Superhero Overview</h2>
+            <p>
+                In the TV show The Boys, Homelander and the superhero group The Seven live in Vought International's headquarters, also known as Vought Tower. In season 4, episode 4, Homelander returns to Vought Tower's labs and leaves a bloody mess of corpses in the "bad room". This episode shows how Homelander hasn't recovered from the messed-up experiments he was subjected to as a child
+            </p>
+        </div>
+
+        <section id="about">
+            <h2>About the United States</h2>
+            <p>
+                The United States of America (USA or U.S.A.), commonly known as the United States (US or U.S.) or America, is a country primarily located in North America. It is a federal union of 50 states, the federal capital district of Washington, D.C., and 326 Indian reservations.[j] The 48 contiguous states border Canada to the north and Mexico to the south. The State of Alaska lies to the northwest, while the State of Hawaii is an archipelago in the Pacific Ocean. The United States also asserts sovereignty over five major island territories and various uninhabited islands.[k] The country has the world's third-largest land area,[d] second-largest exclusive economic zone, and third-largest population, exceeding 334 million.[l]
+
+                Paleo-Indians migrated across the Bering land bridge more than 12,000 years ago, and went on to form various civilizations and societies. British colonization led to the first settlement of the Thirteen Colonies in Virginia in 1607. Clashes with the British Crown over taxation and political representation sparked the American Revolution, with the Second Continental Congress formally declaring independence on July 4, 1776. Following its victory in the 1775–1783 Revolutionary War, the country continued to expand across North America. As more states were admitted, a North-South sectional division over slavery led to the secession of the Confederate States of America, which fought the remaining states of the Union during the 1861–1865 American Civil War. With the Union's victory and preservation, slavery was abolished nationally. By 1890, the United States had established itself as a great power. After Japan's attack on Pearl Harbor in December 1941, the U.S. entered World War II. The aftermath of the war left the U.S. and the Soviet Union as the world's two superpowers and led to the Cold War, during which both countries engaged in a struggle for ideological dominance and international influence. Following the Soviet Union's collapse and the end of the Cold War in 1991, the U.S. emerged as the world's sole superpower, wielding significant geopolitical influence globally.
+                
+                The U.S. national government is a presidential constitutional federal republic and liberal democracy with three separate branches: legislative, executive, and judicial. It has a bicameral national legislature composed of the House of Representatives, a lower house based on population; and the Senate, an upper house based on equal representation for each state. Substantial autonomy is provided by federalism, with a political culture promoting liberty, equality, individualism, personal autonomy, and limited government.
+                
+                One of the world's most developed countries, the United States has had the largest nominal GDP since about 1890 and accounted for 15% of the global economy in 2023.[m] It possesses by far the largest amount of wealth of any country and has the highest disposable household income per capita among OECD countries. The U.S. ranks among the world's highest in economic competitiveness, productivity, innovation, human rights, and higher education. Its hard power and cultural influence have a global reach. The U.S. is a founding member of the World Bank, Organization of American States, NATO, and United Nations,[n] as well as a permanent member of the UN Security Council.
+
+                The first documented use of the phrase "United States of America" is a letter from January 2, 1776. Stephen Moylan, a Continental Army aide to General George Washington, wrote to Joseph Reed, Washington's aide-de-camp, seeking to go "with full and ample powers from the United States of America to Spain" to seek assistance in the Revolutionary War effort.[21][22] The first known public usage is an anonymous essay published in the Williamsburg newspaper, The Virginia Gazette, on April 6, 1776.[23][24][21] By June 1776, the "United States of America" appeared in the Articles of Confederation[25][26] and the Declaration of Independence.[25] The Second Continental Congress adopted the Declaration of Independence on July 4, 1776
+            </p>
+            <p>
+                The country is known for its democratic system of government, where citizens have the 
+                right to vote for their representatives. The United States is also home to numerous 
+                natural wonders, national parks, and cultural landmarks.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Superhero Info</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show the selected section
+            const activeSection = document.getElementById(sectionId);
+            activeSection.classList.add('active');
+        }
+    </script>
+</body>
+</html>
