@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the top */
+    flex-direction: column;
+    margin: 20px; /* Added margin for spacing */
+}
+
+/* Container styles */
+.container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+/* Input field styles */
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    width: 300px;
+    font-size: 16px;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #007BFF;
+}
+
+/* Suggestions box styles */
+.suggestions {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-width: 300px;
+    margin: 0 auto;
+    background-color: #fff;
+    position: absolute; /* To position suggestions */
+    z-index: 1; /* Ensure suggestions appear above other content */
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+/* Gallery styles */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust minimum size */
+    gap: 16px;
+    padding: 20px;
+    max-width: 1200px; /* Optional: Set a maximum width for the gallery */
+    margin: 0 auto;
+}
+
+/* Image container styles */
+.image-container {
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    position: relative; /* For positioning child elements */
+    height: 250px; /* Fixed height for all images */
+}
+
+.image-container:hover {
+    transform: scale(1.05);
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%; /* Fill the height of the container */
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+    display: block;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Smaller min size for tablets */
+    }
+
+    input[type="text"] {
+        width: 100%; /* Full width for input fields on smaller screens */
+    }
+
+    .image-container {
+        height: 200px; /* Reduce height of images for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        margin: 10px; /* Reduce margins for small devices */
+    }
+
+    h1 {
+        font-size: 1.5rem; /* Smaller heading font size for mobile */
+    }
+
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Smaller min size for mobile */
+    }
+
+    .image-container {
+        height: 150px; /* Further reduce height for mobile images */
+    }
+
+    input[type="text"] {
+        width: 100%; /* Full width on mobile */
+        font-size: 14px; /* Adjust input text size for mobile */
+    }
+
+    .suggestions {
+        max-width: 100%; /* Adjust suggestions width to mobile size */
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Gallery</h1>
+        <div id="suggestions" class="suggestions" style="display: none;"></div>
+    </div>
+    <div class="gallery">
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image1.jpg" target="_blank">
+                <img src="https://wvusstatic.com/www/uploads/D310-0715-06_428506-1280x801.jpg" alt="Image 1">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image2.jpg" target="_blank">
+                <img src="https://www.aaastateofplay.com/media/page-images/free-guides/Names-of-Playground-Equipment.jpg" alt="Image 2">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image3.jpg" target="_blank">
+                <img src="https://www.eduminatti.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Feduminatti-com%2Fimage%2Fupload%2Fq_auto%2Cf_auto%2F%2Fgallery%2Ftelangana%2F%2FG14.png&w=1200&q=75"alt="Image 3">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image4.jpg" target="_blank">
+                <img src="https://img.freepik.com/premium-photo/teamwork-sports-fist-bump-with-man-basketball-court-fitness-support-friends-goals-partnership-community-with-basketball-player-training-workout-exercise-energy_590464-107003.jpg" alt="Image 4">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image5.jpg" target="_blank">
+                <img src="https://cms.edccts.com/uploads/edc-cts/gallery/media/01-20220411151754.jpg" alt="Image 5">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image6.jpg" target="_blank">
+                <img src="https://store.learningroutes.in/images/colleges/Parul-University/hero-image/banner.webp" alt="Image 6">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image7.jpg" target="_blank">
+                <img src="https://w0.peakpx.com/wallpaper/746/954/HD-wallpaper-rain-love-colors-sad-umbrella-artistic.jpg" alt="Image 7">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image8.jpg" target="_blank">
+                <img src="image.png" alt="Image 8">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image9.jpg" target="_blank">
+                <img src="https://www.mistay.in/travel-blog/content/images/2023/03/Hyderabad.jpg" alt="Image 9">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image10.jpg" target="_blank">
+                <img src="https://www.bennett.edu.in/wp-content/uploads/2023/10/cyber-security.jpg" alt="Image 10">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image11.jpg" target="_blank">
+                <img src="https://thehackerish.com/thpu/2020/07/image-7.png" alt="Image 11">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image12.jpg" target="_blank">
+                <img src="https://static.toiimg.com/thumb/msid-103332267,width-1280,height-720,resizemode-72/103332267.jpg" alt="Image 12">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image13.jpg" target="_blank">
+                <img src="https://i.guim.co.uk/img/media/0a5f59d149d984985581a2bf99fd140f13629644/0_177_3888_2333/master/3888.jpg?width=1200&quality=85&auto=format&fit=max&s=ba2b4ef9ffb66f706ec8363286d376ba" alt="Image 13">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image14.jpg" target="_blank">
+                <img src="https://platform.vox.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25440927/GettyImages_875509_001.jpg?quality=90&strip=all&crop=0,10.671533564388,100,78.656932871224" alt="Image 14">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image15.jpg" target="_blank">
+                <img src="https://miro.medium.com/v2/resize:fit:1400/0*SPXR23rNrWGV7uDC.jpg" alt="Image 15">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image16.jpg" target="_blank">
+                <img src="https://i1.sndcdn.com/artworks-p6znVQk7zi2CFazx-JYDSsQ-t500x500.jpg" alt="Image 16">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image17.jpg" target="_blank">
+                <img src="https://img.freepik.com/premium-photo/dark-scary-background-dark-black-concrete-wall-scary-halloween-background-cement-texture_493325-1602.jpg" alt="Image 17">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image18.jpg" target="_blank">
+                <img src="https://e0.pxfuel.com/wallpapers/171/660/desktop-wallpaper-dark-creepy-scary-horror-creepy-anime-horror.jpg" alt="Image 18">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image19.jpg" target="_blank">
+                <img src="https://getwallpapers.com/wallpaper/full/d/4/c/588891.jpg" alt="Image 19">
+            </a>
+        </div>
+        <div class="image-container">
+            <a href="/dashboard?task=ssrf&path=/image20.jpg" target="_blank">
+                <img src="https://markedministry.com/wp-content/uploads/2019/05/incredibles-3.jpg?w=920" alt="Image 20">
+            </a>
+        </div>
+    </div>
+
+    <script>
+
+
+
+
+        function selectSuggestion(name) {
+            document.getElementById('searchInput').value = name; // Set input value
+            document.getElementById('suggestions').style.display = 'none'; // Hide suggestions
+            // Optionally, you can trigger a search or filter images based on the selected suggestion
+            // filterImages(name);
+        }
+
+        // Optional: Function to filter images based on the selected suggestion
+        // function filterImages(name) {
+        //     // Logic to filter/display images based on the selected name
+        // }
+    </script>
+</body>
+</html>
