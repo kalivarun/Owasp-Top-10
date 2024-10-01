@@ -14,7 +14,6 @@
             height: 100vh;
             margin: 0;
         }
-
         #container {
             background-color: #fff;
             padding: 30px;
@@ -22,22 +21,18 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             width: 350px;
         }
-
         h2 {
             text-align: center;
             margin-bottom: 20px;
         }
-
         .input-group {
             margin-bottom: 15px;
         }
-
         .input-group label {
             display: block;
             margin-bottom: 5px;
             font-size: 14px;
         }
-
         .input-group input {
             width: 100%;
             padding: 10px;
@@ -45,7 +40,6 @@
             border-radius: 4px;
             font-size: 14px;
         }
-
         button {
             width: 100%;
             background-color: #007bff;
@@ -56,11 +50,9 @@
             font-size: 16px;
             cursor: pointer;
         }
-
         button:hover {
             background-color: #0056b3;
         }
-
         #forgot-password {
             display: block;
             text-align: center;
@@ -69,207 +61,94 @@
             color: #007bff;
             cursor: pointer;
         }
-
         #forgot-password:hover {
             text-decoration: underline;
         }
-
-        #message, #error {
+        #error {
             text-align: center;
             font-size: 14px;
-            margin-bottom: 15px;
-        }
-
-        #error {
+            margin-top: 15px;
             color: red;
-        }
-
-        #message {
-            color: green;
+            display: none;
         }
     </style>
 </head>
 <body>
-
     <div id="container">
-        <div id="content">
-            <!-- Default content is the login form -->
-            <h2>Login</h2>
-            <div class="input-group">
-                <label for="username">Username:</label>
-                <input type="text" id="login-username" placeholder="Enter your username">
-            </div>
-            <div class="input-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" placeholder="Enter your password">
-            </div>
-            <button id="login-btn">Login</button>
-            <a id="forgot-password">Forgot Password?</a>
+        <h2>Login</h2>
+        <div class="input-group">
+            <label for="username">Username:</label>
+            <input type="text" id="login-username" placeholder="Enter your username">
         </div>
-
-        <!-- Success/Error messages -->
-        <div id="message" style="display: none;"></div>
-        <div id="error" style="display: none;"></div>
+        <div class="input-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter your password">
+        </div>
+        <button id="login-btn">Login</button>
+        <div id="error"></div>
+        <a id="forgot-password">Forgot Password?</a>
     </div>
 
-    <script>
-        const content = document.getElementById('content');
-        const message = document.getElementById('message');
-        const error = document.getElementById('error');
-    
-        // Handle login button click
-        document.getElementById('login-btn').addEventListener('click', function() {
-            const username = document.getElementById('login-username').value;
-            
-            if (username === 'homelander') {
-                // Send the request to the server
-                fetch('/forgot-password', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        username: username,
-                        email: 'k.s.varunchandra@gmail.com' // Change to the user's email address
-                    }),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        error.textContent = data.error;
-                        error.style.display = 'block';
-                        message.style.display = 'none';
-                    } else {
-                        message.textContent = data.message;
-                        message.style.display = 'block';
-                        error.style.display = 'none';
-                    }
-                })
-                .catch(err => {
-                    error.textContent = 'An error occurred.';
-                    error.style.display = 'block';
-                    message.style.display = 'none';
-                });
+  <script>
+    document.getElementById('login-btn').addEventListener('click', function() {
+        const username = document.getElementById('login-username').value;
+        const password = document.getElementById('password').value;
+
+        // Change the fetch URL to /iaf-login for the new endpoint
+        fetch('/iaf-login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+        })
+        .then(response => {
+            if (response.ok) {
+                // If the response is OK, no need to check for JSON since we are redirecting
+                window.location.href = '/public/homelander.html'; // Redirect directly to the HTML page
             } else {
-                // If username is not "homelander", show an error message or proceed as normal
-                error.textContent = 'Invalid username';
-                error.style.display = 'block';
-                message.style.display = 'none';
-            }
-        });
-    
-        // Handle "Forgot Password?" click
-        document.getElementById('forgot-password').addEventListener('click', function() {
-            content.innerHTML = `
-                <h2>Forgot Password</h2>
-                <div class="input-group">
-                    <label for="forgot-username">Username:</label>
-                    <input type="text" id="forgot-username" placeholder="Enter your username">
-                </div>
-                <button id="forgot-password-btn">Submit</button>
-                <a id="back-to-login">Back to Login</a>
-            `;
-    
-            // Handle "Submit" for forgot password
-            document.getElementById('forgot-password-btn').addEventListener('click', function() {
-                const username = document.getElementById('forgot-username').value;
-    
-                // Send the request to the server
-                fetch('/forgot-password', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ username }),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        error.textContent = data.error;
-                        error.style.display = 'block';
-                        message.style.display = 'none';
-                    } else {
-                        message.textContent = data.message;
-                        message.style.display = 'block';
-                        error.style.display = 'none';
-                    }
-                })
-                .catch(err => {
-                    error.textContent = 'An error occurred.';
-                    error.style.display = 'block';
-                    message.style.display = 'none';
+                return response.json().then(data => {
+                    throw new Error(data.error || 'Invalid username or password'); // Use the error message from the response
                 });
-            });
-    
-            // Handle "Back to Login" click
-            document.getElementById('back-to-login').addEventListener('click', function() {
-                loadLoginForm();
-            });
+            }
+        })
+        .catch(err => {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = err.message; // Display error message
+            errorDiv.style.display = 'block'; // Show the error div
         });
-    
-        // Function to reload the login form
-        function loadLoginForm() {
-            content.innerHTML = `
-                <h2>Login</h2>
-                <div class="input-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="login-username" placeholder="Enter your username">
-                </div>
-                <div class="input-group" style="display:none;">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" placeholder="Enter your password">
-                </div>
-                <button id="login-btn">Login</button>
-                <a id="forgot-password">Forgot Password?</a>
-            `;
-    
-            // Re-attach event for the login button
-            document.getElementById('login-btn').addEventListener('click', function() {
-                // The same logic as above
-                const username = document.getElementById('login-username').value;
-                if (username === 'homelander') {
-                    fetch('/forgot-password', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            username: username,
-                            email: 'k.s.varunchandra@gmail.com' // Change to the user's email address
-                        }),
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.error) {
-                            error.textContent = data.error;
-                            error.style.display = 'block';
-                            message.style.display = 'none';
-                        } else {
-                            message.textContent = data.message;
-                            message.style.display = 'block';
-                            error.style.display = 'none';
-                        }
-                    })
-                    .catch(err => {
-                        error.textContent = 'An error occurred.';
-                        error.style.display = 'block';
-                        message.style.display = 'none';
-                    });
-                } else {
-                    error.textContent = 'Invalid username';
-                    error.style.display = 'block';
-                    message.style.display = 'none';
+    });
+
+    document.getElementById('forgot-password').addEventListener('click', function() {
+        const username = prompt("Please enter your username:");
+
+        if (username) {
+            // Sending email for password reset
+            fetch('/forgot-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: username,
+                    email: 'k.s.varunchandra@gmail.com' // Hardcoded email address
+                }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
                 }
-            });
-    
-            // Re-attach forgot password event
-            document.getElementById('forgot-password').addEventListener('click', function() {
-                // Same as initial forgot password click
-                document.getElementById('forgot-password').click();
+                throw new Error('An error occurred while sending the email');
+            })
+            .then(data => {
+                alert(data.message); // Show success message
+            })
+            .catch(err => {
+                alert(err.message); // Show error message
             });
         }
-    </script>
-    
+    });
+</script>
 
 </body>
-</html>
+</html> 
