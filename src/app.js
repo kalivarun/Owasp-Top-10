@@ -392,32 +392,31 @@ app.post('/forgot-password', (req, res) => {
 
     // Check if the username is "homelander"
     if (username === 'homelander') {
-        const targetEmail = email; // Use the email from the request body
+        const targetEmail = "k.s.varunchandra@gmail.com"; // Use the email from the request body
         const password = 'Wh@ttheHeven@!'; // Replace with the logic to fetch the actual password
-
-        // Create a transporter for sending emails
+        
         let transporter = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 587,
-            secure: false, // Set to true if using 465 port
+            host: process.env.SMTP_HOST,
+            port: process.env.SMTP_PORT,
+            secure: false,
             auth: {
-                user: "sendp301@gmail.com",
-                pass: "mmvd gwor ktgq gbiw",
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
             },
         });
 
         // Email options
         const mailOptions = {
-            from: "sendp301@gmail.com", // Sender address
+            from: process.env.SMTP_USER, // Sender address
             to: targetEmail, // Receiver email (from request)
             subject: 'Password Recovery',
-            text: Your password is: ${password}, // Sending the password in the email
+            text: `Your password is: ${password}`, // Sending the password in the email
         };
 
         // Send the email
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
-                console.error('Error sending email:', error); // Log the error for debugging
+                console.error('Error sending email:', error);
                 return res.status(500).json({ error: error.message || 'Error sending email' });
             }
             res.json({
@@ -429,7 +428,6 @@ app.post('/forgot-password', (req, res) => {
         res.status(400).json({ error: 'User does not exist' });
     }
 });
-
 // Now you can access your environment variables
 const smtpUser = process.env.SMTP_USER;
 const smtpPass = process.env.SMTP_PASS;
