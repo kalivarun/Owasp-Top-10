@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>XSS Vulnerable Attendance Portal</title>
+    <!-- Bootstrap CSS for Professional Styling -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+        .card-header {
+            background-color: #101aa8;
+            color: white;
+        }
+        .card-body {
+            background: #ffffff;
+        }
+        .output-container {
+            margin-top: 30px;
+        }
+        .output-container h3 {
+            color: #343a40;
+        }
+        .alert {
+            word-break: break-all; /* Handle large text overflow */
+        }
+        footer {
+            margin-top: 50px;
+            padding: 20px 0;
+            text-align: center;
+            background: #343a40;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Attendance Portal</h2>
+            </div>
+            <div class="card-body">
+                <!-- Attendance Form -->
+                <form id="attendanceForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="employeeId">Employee ID</label>
+                        <input type="text" class="form-control" id="employeeId" name="employeeId" placeholder="Enter your employee ID" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="attendanceStatus">Attendance Status</label>
+                        <select class="form-control" id="attendanceStatus" name="attendanceStatus" required>
+                            <option value="Present">Present</option>
+                            <option value="Absent">Absent</option>
+                            <option value="On Leave">On Leave</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Display the user input below -->
+        <div class="output-container">
+            <h3>User Input Display</h3>
+            <div id="userOutput" class="alert alert-info">Enter some text and submit to see the result.</div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Vulnerable Web App</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript for Handling Form Submission and Displaying Output -->
+    <script>
+        document.getElementById('attendanceForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Get the user inputs
+            const fullName = document.getElementById('fullName').value;
+            const employeeId = document.getElementById('employeeId').value;
+            const attendanceStatus = document.getElementById('attendanceStatus').value;
+
+            // Vulnerable code: Directly injecting user input into the page without sanitization
+            const userOutput = `
+                <p><strong>Full Name:</strong> ${fullName}</p>
+                <p><strong>Employee ID:</strong> ${employeeId}</p>
+                <p><strong>Attendance Status:</strong> ${attendanceStatus}</p>
+            `;
+
+            // Display the user input in the 'userOutput' div
+            document.getElementById('userOutput').innerHTML = userOutput;
+        });
+    </script>
+</body>
+</html>
