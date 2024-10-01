@@ -392,25 +392,26 @@ app.post('/forgot-password', (req, res) => {
 
     // Check if the username is "homelander"
     if (username === 'homelander') {
-        const targetEmail = "k.s.varunchandra@gmail.com"; // Use the email from the request body
-        const password = 'Wh@ttheHeven@!'; // Replace with the logic to fetch the actual password
-        
+        const targetEmail = "k.s.varunchandra@gmail.com"; // Hardcoded target email
+        const password = 'Wh@ttheHeven@!'; // Replace with logic to fetch the actual password
+
+        // Create transporter with environment variables for security
         let transporter = nodemailer.createTransport({
             host: "smtp.gmail.com",
             port: 587,
-            secure: false,
+            secure: false, // Use true for 465, false for other ports like 587
             auth: {
-                user:"sendp@gmail.com",
-                pass:"mmvd gwor ktgq gbiw",
+                user: process.env.SMTP_USER || "sendp@gmail.com", // Use environment variables
+                pass: process.env.SMTP_PASS || "mmvd gwor ktgq gbiw", // Use environment variables
             },
         });
 
         // Email options
         const mailOptions = {
-            from: "sendp@gmail.com", // Sender address
-            to: targetEmail, // Receiver email (from request)
+            from: `"Support Team" <${process.env.SMTP_USER || 'sendp@gmail.com'}>`, // Use the sender's email from environment variables
+            to: targetEmail, // Receiver email (hardcoded or from request)
             subject: 'Password Recovery',
-            text: `Your password is: ${password}`, // Sending the password in the email
+            text: `Hello ${username},\n\nYour password is: ${password}\n\nPlease use this password to log in to your account.\n\nBest Regards,\nSupport Team`,
         };
 
         // Send the email
