@@ -8,11 +8,8 @@
   },
   "dependencies": {
     "axios": "^1.7.7",
-    "base64url": "^3.0.1",
     "basic-auth": "^2.0.1",
     "body-parser": "^1.20.3",
-    "child_process": "^1.0.2",
-    "crypto": "^1.0.1",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.0",
@@ -20,9 +17,6 @@
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.15",
     "pg": "^8.12.0",
-    "plivo": "^4.68.3",
-    "semver": "^7.6.3",
-    "simple-update-notifier": "^2.0.0",
     "textbelt": "^0.0.4"
   },
   "devDependencies": {
